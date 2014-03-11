@@ -3,6 +3,19 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
+# =========== addon ===========
+
+# Use the twitter gem to pull data from the twitter API
+gem 'twitter'
+
+# Use to get the cordinate of a specific location
+gem 'geocoder'
+
+# Use to get the woeid of countries from the Yahoo API
+gem 'httparty'
+
+# =============================
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 
@@ -35,6 +48,8 @@ end
 group :test do
 	gem 'rspec-rails'
 	gem 'capybara'
+	gem 'pry-rails'
+	gem 'simplecov', '~> 0.7.1'
 end
 
 group :development do
@@ -42,6 +57,7 @@ group :development do
 	gem 'capybara'
 	gem 'pry'
 	gem 'pry-nav'
+	gem 'simplecov', '~> 0.7.1'
 end
 
 # Use ActiveModel has_secure_password

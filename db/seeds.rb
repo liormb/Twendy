@@ -1,7 +1,10 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# ================================
+# Creates countries and adds woeid
+# ================================
+
+# client = Twitter::REST::Client.new do |config|
+#   config.consumer_key        = "YOUR_CONSUMER_KEY"
+#   config.consumer_secret     = "YOUR_CONSUMER_SECRET"
+#   config.access_token        = "YOUR_ACCESS_TOKEN"
+#   config.access_token_secret = "YOUR_ACCESS_SECRET"
+# end
