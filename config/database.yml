@@ -19,7 +19,7 @@ development:
   encoding: unicode
   database: twendy_development
   pool: 5
-  username: twendy
+  username: liormb
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -48,7 +48,7 @@ test:
   encoding: unicode
   database: twendy_test
   pool: 5
-  username: twendy
+  username: liormb
   password:
 
 production:
@@ -56,5 +56,5 @@ production:
   encoding: unicode
   database: twendy_production
   pool: 5
-  username: twendy
+  username: liormb
   password:
