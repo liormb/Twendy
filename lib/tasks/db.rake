@@ -16,7 +16,7 @@ namespace :db do
       # trends comes in order as most popular comes first
       trends = @client.trends(woeid) 
       trends.attrs[:trends].map do |trend|
-        Trend.find_by_name(trend[:name]) || Trend.create({ name: trend[:name], twitter_url: trend[:url] })
+        Trend.find_by_name(trend[:name]) || Trend.create({ name: trend[:name][0...255], twitter_url: trend[:url][0...255] })
       end
     end
 
