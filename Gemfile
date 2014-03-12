@@ -14,6 +14,20 @@ gem 'geocoder'
 # Use to get the woeid of countries from the Yahoo API
 gem 'httparty'
 
+# ---------- debuging ---------
+
+gem 'pry-rails'
+
+# ---------- testing ----------
+
+gem 'rspec-rails'
+gem 'capybara'
+gem 'simplecov', '~> 0.7.1'
+
+# ------ Heroku warnings ------
+
+gem 'rails_12factor'
+
 # =============================
 
 # Use postgresql as the database for Active Record
@@ -44,21 +58,6 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
-
-#group :test do
-	gem 'rspec-rails'
-	gem 'capybara'
-	gem 'pry-rails'
-	gem 'simplecov', '~> 0.7.1'
-#end
-
-# group :development do
-# 	gem 'rspec-rails'
-# 	gem 'capybara'
-# 	gem 'pry'
-# 	gem 'pry-nav'
-# 	gem 'simplecov', '~> 0.7.1'
-# end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
