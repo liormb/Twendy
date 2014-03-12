@@ -11,7 +11,7 @@ namespace :db do
   end
 
   desc "Seed the trends table"
-  task trends: :environment do
+  task trends: [:auth] do
     def get_trends(woeid)
       # trends comes in order as most popular comes first
       trends = @client.trends(woeid) 
