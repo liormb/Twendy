@@ -11,7 +11,7 @@ namespace :db do
   end
 
   desc "Seed the trends table"
-  task trends: [:auth] do
+  task trends: [:auth, :clear_old_trends] do
     def get_trends(woeid)
       # trends comes in order as most popular comes first
       trends = @client.trends(woeid) 
@@ -20,36 +20,42 @@ namespace :db do
       end
     end
 
-    # heroku request limit is set to fetch 7 countries records every 15 min.
+    # heroku request limit is set to fetch 6 countries records every 10 min.
     # That is set in order to meet with the Twitter request limits
-    countries = Country.order(trends_updated: :asc).shift(7)
+    countries = Country.order(trends_updated: :asc).shift(6)
     countries.each do |country|
       trends = get_trends(country.woeid)
       if trends
         trends.each_with_index do |trend, index|
           data = { country_id: country.id, trend_id: trend.id, rank: index + 1, time_of_trend: Time.now }
-          country_trends = CountriesTrend.where(country_id: country.id) || []
-          if country_trends.length < 10
-            CountriesTrend.create(data) # create new object
-          else
-            id = country_trends.order(time_of_trend: :asc).first.id
-            CountriesTrend.update(id, data) # update the older one
-          end
+          CountriesTrend.create(data)
         end
-        country.trends_updated = Time.now
-        country.save!
       end
+      country.trends_updated = Time.now
+      country.save!
     end
   end
 
-  desc "Clear countries table"
+  desc "Clear objects that older than 24 hour cycle"
+  task clear_old_trends: :environment do
+    cycle = 86400 # day in seconds
+    Trend.where("created_at < ?", Time.now - cycle).delete_all
+    CountriesTrend.where("time_of_trend < ?", Time.now - cycle).delete_all
+  end
+
+  desc "Clear Countries table"
   task clear_countries: :environment do
     Country.delete_all
   end
 
-  desc "Clear trends table"
+  desc "Clear Trends table"
   task clear_trends: :environment do
     Trend.delete_all
+  end
+
+  desc "Clear CountriesTrend joiner table"
+  task clear_countriestrend: :environment do
+    CountriesTrend.delete_all
   end
 
   desc "Clear all tables"
