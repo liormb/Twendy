@@ -45,20 +45,20 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-group :test do
+#group :test do
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'pry-rails'
 	gem 'simplecov', '~> 0.7.1'
-end
+#end
 
-group :development do
-	gem 'rspec-rails'
-	gem 'capybara'
-	gem 'pry'
-	gem 'pry-nav'
-	gem 'simplecov', '~> 0.7.1'
-end
+# group :development do
+# 	gem 'rspec-rails'
+# 	gem 'capybara'
+# 	gem 'pry'
+# 	gem 'pry-nav'
+# 	gem 'simplecov', '~> 0.7.1'
+# end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
