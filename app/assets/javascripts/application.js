@@ -12,5 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap.min
+//= require d3.min
+//= require queue.min
+//= require topojson
 //= require_tree .
