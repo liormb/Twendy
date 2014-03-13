@@ -20,6 +20,7 @@ svg {
 
 .sphere {
   fill: none;
+  fill: rgb(156,191,217);
   stroke: #777;
   stroke-width: .5px;
   stroke-opacity: .5;
@@ -36,9 +37,13 @@ svg {
   fill: #dadac4;
   stroke: #666;
   stroke-width: 0.5px;
-  transition: all 0.5s;
+  transition: all 0.4s;
 }
 
 .country:hover {
   fill: red;
+}
+
+.twitter-country {
+  fill: rgb(115,169,238);
 }
