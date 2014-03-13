@@ -55,10 +55,6 @@ function drawGlobe(twitter_countries) {
 	    return a.name.localeCompare(b.name);
 	  });
 
-	  test1 = countries;
-	  test2 = names;
-	  test3 = twitter_countries;
-
 		// draw all the globe's countries
 		var globe = groupPaths.selectAll('.country')
 			.data(countries)
@@ -70,6 +66,7 @@ function drawGlobe(twitter_countries) {
 				.attr('d', path)
 				.on("click", clicked);
 
+		// adding title to every country
 		globe.append('title')
 			.text(function(d) { return d.name; });
 
@@ -107,7 +104,8 @@ function drawGlobe(twitter_countries) {
 				  groupPaths.transition()
 				    .duration(800)
 				    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-				    .style("stroke-width", 1.5 / k + "px");
+				    .style("stroke-width", 1.5 / k + "px")
+				    .each("end", function(){ heatMap(d.name); });
 			  });
 		} // end of clicked function
 
