@@ -11,7 +11,7 @@ namespace :db do
   end
 
   desc "Seed the trends table"
-  task trends: [:auth, :clear_old_trends] do
+  task trends: [:auth] do
     def update_trend(trend)
       # if trend exist: update the updated_at field and return it else return nil
       target = Trend.find_by_name(trend[:name])
@@ -41,12 +41,14 @@ namespace :db do
       country.trends_updated = Time.now
       country.save!
     end
+
+    Rake::Task["db:clear_old_trends"].execute
   end
 
   desc "Clear objects that older than 24 hour cycle"
   task clear_old_trends: :environment do
     cycle = 86400 # day in seconds
-    #Trend.where("updated_at < ?", Time.now - cycle).destroy_all
+    Trend.where("updated_at < ?", Time.now - cycle).destroy_all
     CountriesTrend.where("time_of_trend < ?", Time.now - cycle).destroy_all
   end
 

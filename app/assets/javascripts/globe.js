@@ -110,9 +110,9 @@ function drawGlobe(twitter_countries) {
 				    .style("stroke-width", 1.5 / k + "px")
 				    .each("end", function(){
 				    	if (showHeatMap && twitter_countries.indexOf(d.name) > -1) {
-				    		console.dir(d);
-				    		heatMap(d.name);
-				    		$('.heatmap-container').fadeIn(300);
+				    		var trends_list = new TrendsList;
+								trends_list.fetch(d.name);
+				    		//heatMap(d.name);
 				    	}
 				    });
 			  });

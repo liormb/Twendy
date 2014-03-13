@@ -1,6 +1,7 @@
 
-function Trend(name, trend, interval, rank) {
+function Trend(name, twitter_url, trend, interval, rank) {
 	this.name = name;
+	this.twitter_url = twitter_url;
 	this.trend = trend;
 	this.interval = interval;
 	this.rank = rank;
@@ -22,11 +23,11 @@ TrendsList.prototype = {
 			dataType: "json",
 			data: { name: country },
 			success: function(data) {
-				// $.each(data, function(index, trend) {
-				// 	var new_trend = new Trend(trend.name, trend.trend, trend.interval, trend.rank);
-				// 	self.add(new_trend);
-				// });
-				// self.trends_list_view.render(self.trends);
+				$.each(data, function(index, trend) {
+					var new_trend = new Trend(trend.name, trend.twitter_url, trend.trend, trend.interval, trend.rank);
+					self.add(new_trend);
+				});
+				self.trends_list_view.render(self.trends);
 			},
 			error: function(data) {
 				console.log("Failed to connect the database.");
@@ -41,27 +42,27 @@ function TrendsListView(){
 
 TrendsListView.prototype = { 
 	render: function(trends) {
-		var $globus = $('canvas'),
-        $chart  = $('#chart'),
-        $ul = $('.trend-container ul');
+		//var $globus = $('canvas'),
+    //var $chart  = $('#chart'),
 
-		$chart.fadeTo(200,.1);
-		$chart.empty();
+		//$chart.fadeTo(200,.1);
+		//$chart.empty();
 		
-		trendsD3([],trends);
-		$chart.fadeTo(200, 1);
+		// trendsD3([],trends);
+		// $chart.fadeTo(200, 1);
 		
-		var curr_trends = [];
-		$.each(trends, function(index, trend) {
-			if (trend.interval === 1) curr_trends.push(trend.name);
-		});
-		curr_trends = curr_trends.slice(-10,-1);
+		// var curr_trends = [];
+		// $.each(trends, function(index, trend) {
+		// 	if (trend.interval === 1) curr_trends.push(trend.name);
+		// });
+		// curr_trends = curr_trends.slice(-10,-1);
 
-		$ul.empty();
-		$.each(curr_trends, function(index, trend) {
-			var $li = $('<li>').attr({'class': 'trend'}).text(trend);
-			$ul.append($li);
-		});
+		// $ul.empty();
+		// $.each(curr_trends, function(index, trend) {
+		// 	var $li = $('<li>').attr({'class': 'trend'}).text(trend);
+		// 	$ul.append($li);
+		// });
+		$('.heatmap-container').fadeIn(300);
 	}
 }
 
