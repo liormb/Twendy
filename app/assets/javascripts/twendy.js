@@ -42,28 +42,9 @@ function TrendsListView(){
 
 TrendsListView.prototype = { 
 	render: function(trends) {
-		// I'M HERE
-		
-		//var $globus = $('canvas'),
-    //var $chart  = $('#chart'),
-
-		//$chart.fadeTo(200,.1);
-		//$chart.empty();
-		
-		// trendsD3([],trends);
-		// $chart.fadeTo(200, 1);
-		
-		// var curr_trends = [];
-		// $.each(trends, function(index, trend) {
-		// 	if (trend.interval === 1) curr_trends.push(trend.name);
-		// });
-		// curr_trends = curr_trends.slice(-10,-1);
-
-		// $ul.empty();
-		// $.each(curr_trends, function(index, trend) {
-		// 	var $li = $('<li>').attr({'class': 'trend'}).text(trend);
-		// 	$ul.append($li);
-		// });
+    var $chart  = $('.chart-container');
+		$chart.empty();
+		heatMap([],trends);
 		$('.heatmap-container').fadeIn(300);
 	}
 }
@@ -123,21 +104,7 @@ function CountriesListView(){
 CountriesListView.prototype = { 
 	render: function() {
 		drawGlobe(this.collection.names());
-		// var self = this;
-		// var $ul = $('ul#country-list');
-		// $.each(this.collection.countries, function(index, country) {
-		// 	var $li = $('<li>');
-		// 	$li.attr({'id': 'country'}).text(country.name);
-		// 	$ul.append($li);
-		// });
-		// self.addHandlers();
 	}
-	// addHandlers: function() {
-	// 	var self = this;
-	// 	$('.twitter-country').on('click', function(event) {
-	// 		self.trends_list.fetch(this.textContent);
-	// 	});
-	// }
 }
 
 $(function() {
