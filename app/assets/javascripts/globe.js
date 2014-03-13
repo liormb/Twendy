@@ -7,6 +7,7 @@ function drawGlobe(twitter_countries) {
 	var scale_factor = 5;
 	var sens = 0.25;
 	var centered;
+	var showHeatMap;
 
 	var svg = d3.select(".globe-container")
 		.append('svg')
@@ -74,7 +75,7 @@ function drawGlobe(twitter_countries) {
 			if (d3.event.defaultPrevented) return; // click suppressed
 
 	    d3.transition()
-	      .duration(300)
+	      .duration(400)
 	      .tween("rotate", function() {
 	        var p = d3.geo.centroid(d),
 	            r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
@@ -92,11 +93,13 @@ function drawGlobe(twitter_countries) {
 				    y = centroid[1];
 				    k = 3;
 				    centered = d;
+				    showHeatMap = true;
 				  } else {
 				    x = width / 2;
 				    y = height / 2;
 				    k = 1;
 				    centered = null;
+				    showHeatMap = false;
 				  }
 				  groupPaths.selectAll("path")
 				    .classed("active", centered && function(d) { return d === centered; });
@@ -105,7 +108,12 @@ function drawGlobe(twitter_countries) {
 				    .duration(800)
 				    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
 				    .style("stroke-width", 1.5 / k + "px")
-				    .each("end", function(){ heatMap(d.name); });
+				    .each("end", function(){
+				    	if (showHeatMap) {
+				    		heatMap(d.name);
+				    		$('.heatmap-container').fadeIn(300);
+				    	}
+				    });
 			  });
 		} // end of clicked function
 

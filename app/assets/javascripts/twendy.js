@@ -14,22 +14,22 @@ TrendsList.prototype = {
 	add: function(trend) {
 		this.trends.push(trend);
 	},
-	fetch: function(country_name) {
+	fetch: function(country) {
 		var self = this;
 		$.ajax({
 			method: "get",
 			url: "/countries/id",
 			dataType: "json",
-			data: { name: country_name },
+			data: { name: country },
 			success: function(data) {
-				$.each(data, function(index, trend) {
-					var new_trend = new Trend(trend.name, trend.trend, trend.interval, trend.rank);
-					self.add(new_trend);
-				});
-				self.trends_list_view.render(self.trends);
+				// $.each(data, function(index, trend) {
+				// 	var new_trend = new Trend(trend.name, trend.trend, trend.interval, trend.rank);
+				// 	self.add(new_trend);
+				// });
+				// self.trends_list_view.render(self.trends);
 			},
 			error: function(data) {
-				console.log("Failed to connect to the database.");
+				console.log("Failed to connect the database.");
 			}
 		});
 	}
@@ -107,7 +107,7 @@ CountriesList.prototype = {
 
 function CountriesListView(){
 	this.collection = new CountriesList;
-	this.trends_list = new TrendsList;
+	//this.trends_list = new TrendsList;
 
 	// bypassing lexical scope to seperate concerns
 	var self = this;
@@ -128,13 +128,13 @@ CountriesListView.prototype = {
 		// 	$ul.append($li);
 		// });
 		// self.addHandlers();
-	},
-	addHandlers: function() {
-		var self = this;
-		$('li#country').on('click', function(event) {
-			self.trends_list.fetch(this.textContent);
-		});
 	}
+	// addHandlers: function() {
+	// 	var self = this;
+	// 	$('.twitter-country').on('click', function(event) {
+	// 		self.trends_list.fetch(this.textContent);
+	// 	});
+	// }
 }
 
 $(function() {

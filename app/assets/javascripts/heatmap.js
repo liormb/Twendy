@@ -1,9 +1,15 @@
 
 function heatMap(country) {
-	var interval = setInterval(function(){
-		$('.globe-container').after("<div class='heatmap-container'></div>");
-		window.clearInterval(interval)
-	},400);
-
-	// CONTINUE HERE
+	var trends_list = new TrendsList;
+	trends_list.fetch(country);
 }
+
+function eventHandler() {
+	$('#close-heatmap-button').on('click', function(event){
+		$('.heatmap-container').fadeOut(300);
+	});
+}
+
+$(function() {
+	eventHandler();
+});
