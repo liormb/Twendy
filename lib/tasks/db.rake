@@ -48,8 +48,10 @@ namespace :db do
   desc "Clear objects that older than 24 hour cycle"
   task clear_old_trends: :environment do
     cycle = 86400 # day in seconds
-    Trend.where("updated_at < ?", Time.now - cycle).destroy_all
-    CountriesTrend.where("time_of_trend < ?", Time.now - cycle).destroy_all
+    trends = Trend.where("updated_at < ?", Time.now - cycle)
+    trends_ids = trends.map { |trend| trend.id }
+    trends_ids.each { |trend_id| CountriesTrend.find_by_trend_id(trend_id).destroy }
+    trends.destroy_all
   end
 
   desc "Clear Countries table"

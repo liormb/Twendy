@@ -36,6 +36,9 @@ class CountriesTrend < ActiveRecord::Base
 		# fetch country trends from the last 24 hours ordered by creation
 		data = self.where("country_id = ? AND time_of_trend > ?", country_id, Time.now - 86400).order('created_at DESC')
 		
+		# verifying that trends exists (if not, destroy the joiner record)
+		data.map! { |record| Trend.exists?(record.trend_id) ? record : record.destroy }.compact
+
 		# get a uniq 10 result array of trends id's
 		trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10)
 		
