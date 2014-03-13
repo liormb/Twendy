@@ -42,6 +42,8 @@ function TrendsListView(){
 
 TrendsListView.prototype = { 
 	render: function(trends) {
+		// I'M HERE
+		
 		//var $globus = $('canvas'),
     //var $chart  = $('#chart'),
 

@@ -1,7 +1,6 @@
 
 function heatMap(country) {
-	// var trends_list = new TrendsList;
-	// trends_list.fetch(country);
+	
 }
 
 function eventHandler() {

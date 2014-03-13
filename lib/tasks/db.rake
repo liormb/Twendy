@@ -50,8 +50,8 @@ namespace :db do
     cycle = 86400 # day in seconds
     trends = Trend.where("updated_at < ?", Time.now - cycle)
     trends_ids = trends.map { |trend| trend.id }
-    trends_ids.each { |trend_id| CountriesTrend.find_by_trend_id(trend_id).destroy }
-    trends.destroy_all
+    trends_ids.each { |trend_id| CountriesTrend.where("trend_id = ?", trend_id).delete_all }
+    trends.delete_all
   end
 
   desc "Clear Countries table"

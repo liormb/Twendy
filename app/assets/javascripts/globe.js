@@ -112,7 +112,6 @@ function drawGlobe(twitter_countries) {
 				    	if (showHeatMap && twitter_countries.indexOf(d.name) > -1) {
 				    		var trends_list = new TrendsList;
 								trends_list.fetch(d.name);
-				    		//heatMap(d.name);
 				    	}
 				    });
 			  });
