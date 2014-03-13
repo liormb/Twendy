@@ -109,7 +109,8 @@ function drawGlobe(twitter_countries) {
 				    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
 				    .style("stroke-width", 1.5 / k + "px")
 				    .each("end", function(){
-				    	if (showHeatMap) {
+				    	if (showHeatMap && twitter_countries.indexOf(d.name) > -1) {
+				    		console.dir(d);
 				    		heatMap(d.name);
 				    		$('.heatmap-container').fadeIn(300);
 				    	}

@@ -12,11 +12,18 @@ namespace :db do
 
   desc "Seed the trends table"
   task trends: [:auth, :clear_old_trends] do
+    def update_trend(trend)
+      # if trend exist: update the updated_at field and return it else return nil
+      target = Trend.find_by_name(trend[:name])
+      target.nil? ? (return nil) : target.touch
+      return target
+    end
+
     def get_trends(woeid)
       # trends comes in order as most popular comes first
       trends = @client.trends(woeid) 
       trends.attrs[:trends].map do |trend|
-        Trend.find_by_name(trend[:name]) || Trend.create({ name: trend[:name][0...255], twitter_url: trend[:url] })
+        update_trend(trend) || Trend.create({ name: trend[:name][0...255], twitter_url: trend[:url] })
       end
     end
 
@@ -39,6 +46,7 @@ namespace :db do
   desc "Clear objects that older than 24 hour cycle"
   task clear_old_trends: :environment do
     cycle = 86400 # day in seconds
+    #Trend.where("updated_at < ?", Time.now - cycle).destroy_all
     CountriesTrend.where("time_of_trend < ?", Time.now - cycle).destroy_all
   end
 
