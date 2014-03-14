@@ -1,3 +1,20 @@
 // Place all the styles related to the Countries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html {
+	background: rgb(192,222,237) url(image-path('twitter.png')) center center no-repeat;
+}
+#close-heatmap-button {
+	background: url(image-path('close-button.png')) 0 0 no-repeat;
+	overflow: hidden;
+	white-space: nowrap;
+	outline: none;
+	border: none;
+	text-indent: 200%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 48px;
+	height: 48px;
+}
