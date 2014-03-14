@@ -40,7 +40,7 @@ class CountriesTrend < ActiveRecord::Base
 		data.map! { |record| Trend.exists?(record.trend_id) ? record : record.destroy }.compact
 
 		# get a uniq 10 result array of trends id's
-		trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10)
+		trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10).reverse
 		
 		# for every uniq trend fetch a matching set of data that match the heat map
 		trends_ids.each_with_index.map { |id, index|

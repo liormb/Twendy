@@ -10,14 +10,12 @@
   background: #fff;
   color: #333;
 }
-
 .globe-container svg {
   position: absolute;
   top: 0;
   left: 0;
   fill: #fff;
 }
-
 .sphere {
   fill: none;
   fill: rgb(156,191,217);
@@ -25,25 +23,21 @@
   stroke-width: .5px;
   stroke-opacity: .5;
 }
-
 .graticule {
   fill: none;
   stroke: #777;
   stroke-width: .5px;
   stroke-opacity: .5;
 }
-
 .country {
   fill: #dadac4;
   stroke: #666;
   stroke-width: 0.5px;
   transition: all 0.4s;
 }
-
 .country:hover {
   fill: red;
 }
-
 .twitter-country {
   fill: rgb(115,169,238);
 }

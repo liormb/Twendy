@@ -17,7 +17,32 @@
 #close-heatmap-button:hover {
 	background-position: -48px 0;
 }
+.countries-list {
+	position: absolute;
+	top: 42px;
+	left: 10px;
+	list-style: none;
+}
+.countries-list li {
+	color: white;
+	margin-bottom: 22px;
+	font-size: 24px;
+	transition: all 0.4s;
+}
+.countries-list li:hover {
+	color: #e56230;
+	cursor: pointer;
+}
+.countries-list span {
+	color: #e56230;
+}
+.countries-list li:hover span {
+	color: white;
+}
 .chart-container {
+	position: absolute;
+	top: 34px;
+	left: 420px;
 	width: 100%;
 	height: 100%;
 }
@@ -27,22 +52,20 @@
 rect.bordered {
   stroke: rgb(200,200,200);
   stroke-width:2px;
+  transition: all 0.4s;
 }
-
 rect.bordered:hover {
   stroke: #E6E6E6;
+  stroke: #FFF;
 }
-
 text.mono {
   font-size: 9pt;
   font-family: Consolas, courier;
   fill: #000;
 }
-
 text.axis-workweek {
   fill: #000;
 }
-
 text.axis-worktime {
   fill: #000;
 }

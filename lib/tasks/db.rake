@@ -27,9 +27,9 @@ namespace :db do
       end
     end
 
-    # heroku request limit is set to fetch 6 countries records every 10 min.
+    # heroku request limit is set to fetch 7 countries records every 10 min.
     # That is set in order to meet with the Twitter request limits
-    countries = Country.order(trends_updated: :asc).shift(6)
+    countries = Country.order(trends_updated: :asc).shift(7)
     countries.each do |country|
       trends = get_trends(country.woeid)
       if trends

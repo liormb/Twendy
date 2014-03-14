@@ -9,7 +9,7 @@ function heatMap(error, data) {
 	var colors = ['hsla(56,55%,85%,.5)','#e56230','#dc7840','#d38b52','#c0a265','#a8b778','#89ca8c','#77c79f','#61c4b2','#45c1c4','#45a9c4'];
 	var intervals = ["Now", "-2 hours", "-4 hr", "-6 hr", "-10 hr", "-12 hr", "-14 hr", "-16 hr", "-18 hr", "-20 hr", "-22 hr", "-24 hr"];
   var trends = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10"];
-  var gridSize = 54;//Math.floor(width / intervals.length),
+  var gridSize = 52;//Math.floor(width / intervals.length),
   var legendElementWidth = gridSize;
 
   // building the color scale palete
