@@ -42,12 +42,14 @@ function TrendsListView(){
 
 TrendsListView.prototype = { 
 	render: function(trends) {
+		var $countries = $('.countries-list');
     var $chart  = $('.chart-container');
+    $countries.empty();
 		$chart.empty();
 		heatMap([],trends);
 		for (var i=0; i < trends.length; i += 12) {
 			var name = trends[i].name.replace("#", "").substr(0, 22);
-			$('.countries-list').append("<li><span>#</span>" + name + "</li>");
+			$countries.append("<li><span>#</span>" + name + "</li>");
 		}
 		$('.heatmap-container').fadeIn(300);
 	}
