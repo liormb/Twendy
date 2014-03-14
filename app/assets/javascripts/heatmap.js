@@ -5,7 +5,7 @@ function heatMap(error, data) {
   var width = Math.floor((screen.width-50) * 0.8) - margin.left - margin.right;
   var height = Math.floor((screen.height-150) * 0.8) - margin.top - margin.bottom;
   var buckets = 10;
-	var colors = ['rgba(40,40,40,.4)','rgb(141,211,199)','rgb(255,255,179)','rgb(190,186,218)','rgb(251,128,114)','rgb(128,177,211)','rgb(253,180,98)','rgb(179,222,105)','rgb(252,205,229)','rgb(217,217,217)','rgb(188,128,189)'];
+	var colors = ['rgba(40,40,40,.4)','rgb(139,0,64)','rgb(189,60,75)','rgb(220,110,59)','rgb(237,176,90)','rgb(248,226,134)','rgb(248,253,167)','rgb(132,195,165)','rgb(185,223,162)','rgb(81,134,191)','rgb(89,73,163)'];
 	var intervals = ["Now", "-2 hours", "-4 hr", "-6 hr", "-10 hr", "-12 hr", "-14 hr", "-16 hr", "-18 hr", "-20 hr", "-22 hr", "-24 hr"];
   var trends = ["t1", "t2", "t3", "t4", "t5", "t6", "t7", "t8", "t9", "t10"];
   var gridSize = 50;//Math.floor(width / intervals.length),
