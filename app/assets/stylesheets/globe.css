@@ -36,8 +36,11 @@
   transition: all 0.4s;
 }
 .country:hover {
-  fill: red;
+  fill: #e56230;
 }
 .twitter-country {
   fill: rgb(115,169,238);
+}
+.active-country {
+  fill: #e56230;
 }

@@ -27,7 +27,7 @@ TrendsList.prototype = {
 					var new_trend = new Trend(trend.name, trend.twitter_url, trend.trend, trend.interval, trend.rank);
 					self.add(new_trend);
 				});
-				self.trends_list_view.render(self.trends);
+				self.trends_list_view.render(self.trends, country);
 			},
 			error: function(data) {
 				console.log("Failed to connect the database.");
@@ -41,11 +41,11 @@ function TrendsListView(){
 }
 
 TrendsListView.prototype = { 
-	render: function(trends) {
-		var $countries = $('.countries-list');
-    var $chart  = $('.chart-container');
-    $countries.empty();
-		$chart.empty();
+	render: function(trends, country) {
+		var $header = $('.heatmap-container h1').empty();
+		var $countries = $('.countries-list').empty();
+    var $chart  = $('.chart-container').empty();
+    $header.text(country);
 		heatMap([],trends);
 		for (var i=0; i < trends.length; i += 12) {
 			var name = trends[i].name.replace("#", "").substr(0, 22);

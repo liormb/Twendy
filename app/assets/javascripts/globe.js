@@ -65,11 +65,19 @@ function drawGlobe(twitter_countries) {
 					return (twitter_countries.indexOf(d.name) == -1) ? 'country' : 'country twitter-country';
 				})
 				.attr('d', path)
-				.on("click", clicked);
+				.on("click", clicked)
+				.on("mouseover", hovered);
 
 		// adding title to every country
 		globe.append('title')
 			.text(function(d) { return d.name; });
+
+		function hovered(d) {
+			if (twitter_countries.indexOf(d.name) > -1) {
+				groupPaths.selectAll("path")
+					.classed('active-country', false);
+			}
+		}
 
 		function clicked(d) {
 			if (d3.event.defaultPrevented) return; // click suppressed
@@ -101,8 +109,9 @@ function drawGlobe(twitter_countries) {
 				    centered = null;
 				    showHeatMap = false;
 				  }
+
 				  groupPaths.selectAll("path")
-				    .classed("active", centered && function(d) { return d === centered; });
+				    .classed("active-country", centered && function(d) { return d === centered; });
 
 				  groupPaths.transition()
 				    .duration(800)
@@ -112,6 +121,9 @@ function drawGlobe(twitter_countries) {
 				    	if (showHeatMap && twitter_countries.indexOf(d.name) > -1) {
 				    		var trends_list = new TrendsList;
 								trends_list.fetch(d.name);
+				    	} else {
+				    		groupPaths.selectAll("path")
+				    			.classed("active-country", false);
 				    	}
 				    });
 			  });
