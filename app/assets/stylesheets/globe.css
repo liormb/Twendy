@@ -37,10 +37,26 @@
 }
 .country:hover {
   fill: #e56230;
+  cursor: pointer;
 }
 .twitter-country {
   fill: rgb(115,169,238);
 }
 .active-country {
   fill: #e56230;
+}
+.country-tooltip {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  background: #fff;
+  padding: 3px;
+  text-align: left;
+  border: solid #ccc 1px;
+  color: #666;
+  font-size: 12px;
+  font-family: sans-serif;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;  
 }
