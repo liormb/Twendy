@@ -9,6 +9,10 @@ function drawGlobe(twitter_countries) {
 	var centered;
 	var showHeatMap;
 
+	var autoRotate = true;
+	var speed = -1e-2;
+  var start = Date.now();
+
 	var svg = d3.select(".globe-container")
 		.append('svg')
 			.attr('width', width)
@@ -17,8 +21,8 @@ function drawGlobe(twitter_countries) {
 	var projection = d3.geo.orthographic()
 		.scale(width / scale_factor)
 		.translate([width / 2, height / 2])
-		.rotate([0, -25, 0])
-		.clipAngle(90);
+		.rotate([0, -30])
+		.clipAngle(95);
 
 	var graticule = d3.geo.graticule();
 
@@ -67,6 +71,15 @@ function drawGlobe(twitter_countries) {
 				})
 				.attr('d', path);
 
+		// make the globe rotate
+		d3.timer(function(){
+			if (autoRotate) {
+				var rotate = projection.rotate();
+	    	projection.rotate([speed * (Date.now() - start), -15]);
+	    	groupPaths.selectAll('path').attr('d', path);
+	  	}
+		});
+
 		// events processing
 		globe
 			.on("mouseover", function(d){
@@ -89,8 +102,10 @@ function drawGlobe(twitter_countries) {
 			})
 			.on('click', function(d){
 				if (d3.event.defaultPrevented) return; // click suppressed
-				tooltip.style('display', 'none')
+				tooltip.style('display', 'none');
 				
+				autoRotate = false;
+
 		    d3.transition()
 		      .duration(400)
 		      .tween("rotate", function() {
@@ -117,6 +132,21 @@ function drawGlobe(twitter_countries) {
 					    k = 1;
 					    centered = null;
 					    showHeatMap = false;
+
+					    d3.transition()
+					      .duration(800)
+					      .tween("rotate", function() {
+					        r = d3.interpolate(projection.rotate(), [0, -15]);
+					        return function(t) {
+					          projection.rotate(r(t));
+					          groupPaths.selectAll('path').attr('d', path);
+					        };
+					      })
+					    	.transition()
+					  		.each("end", function(){
+		    					start = Date.now();
+		    					autoRotate = true;
+					  		});
 					  }
 
 					  groupPaths.selectAll("path")
@@ -145,6 +175,7 @@ function drawGlobe(twitter_countries) {
 	    	return { x: r[0] / sens, y: -r[1] / sens };
 	    })
 	    .on("drag", function() {
+	    	autoRotate = false;
 	      var rotate = projection.rotate();
 	      projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
 	      svg.selectAll('path').attr('d', path);

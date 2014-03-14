@@ -26,8 +26,8 @@
 .graticule {
   fill: none;
   stroke: #777;
-  stroke-width: .5px;
-  stroke-opacity: .5;
+  stroke-width: .4px;
+  stroke-opacity: .4;
 }
 .country {
   fill: #dadac4;
