@@ -44,7 +44,6 @@ class CountriesTrend < ActiveRecord::Base
 		trends_ids = data.sort_by { |record| record.time_of_trend }.map { |record| record.trend_id }.compact.pop(10)
 
 		# OPTION II: daily trends (get a uniq 10 result array of trend id's as most popular comes first)
-		# daily = true
 		if daily
 			trends_ids.map! do |trend_id|
 				[ trend_id, self.where("trend_id = ?", trend_id).inject(0) { |sum, record| sum + record.rank } ]
