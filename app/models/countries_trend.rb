@@ -34,13 +34,14 @@ class CountriesTrend < ActiveRecord::Base
 		return false if !country_id  # return false if no country has been found 
 
 		# fetch country trends from the last 24 hours ordered by creation
-		data = self.where("country_id = ? AND time_of_trend > ?", country_id, Time.now - 86400).order('created_at DESC')
+		data = self.where("country_id = ? AND time_of_trend > ?", country_id, Time.now - 86400).order('time_of_trend DESC')
 		
 		# verifying that trends exists (if not, destroy the joiner record)
 		data.map! { |record| Trend.exists?(record.trend_id) ? record : record.destroy }.compact
 
 		# get a uniq 10 result array of trends id's as most popular comes first
-		trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10).reverse
+		#trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10).reverse
+		trends_ids = data.map { |record| record.trend_id if !trends.include? record.trend_id }.compact.shift(10).reverse
 		
 		# for every uniq trend fetch a matching set of data that match the heat map
 		trends_ids.each_with_index.map { |id, index|
