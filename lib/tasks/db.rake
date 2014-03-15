@@ -28,7 +28,7 @@ namespace :db do
     end
 
     # heroku request limit is set to fetch 7 countries records every 10 min.
-    # That is set in order to meet with the Twitter request limits
+    # That is set in order to meet with the Twitter request limits (15 calls every 15 min)
     countries = Country.order(trends_updated: :asc).shift(7)
     countries.each do |country|
       trends = get_trends(country.woeid)
@@ -48,10 +48,8 @@ namespace :db do
   desc "Clear objects that older than 24 hour cycle"
   task clear_old_trends: :environment do
     cycle = 86400 # day in seconds
-    trends = Trend.where("updated_at < ?", Time.now - cycle)
-    trends_ids = trends.map { |trend| trend.id }
-    trends_ids.each { |trend_id| CountriesTrend.where("trend_id = ?", trend_id).delete_all }
-    trends.delete_all
+    Trend.where("updated_at < ?", Time.now - cycle).delete_all
+    CountriesTrend.where("time_of_trend < ?", Time.now - cycle).delete_all
   end
 
   desc "Clear Countries table"
