@@ -29,6 +29,7 @@ gem 'simplecov', '~> 0.7.1'
 # ------ Heroku warnings ------
 
 gem 'rails_12factor'
+gem 'sass', '3.2.13'
 
 # =============================
 
