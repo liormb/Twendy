@@ -190,7 +190,6 @@ DEPENDENCIES
   rails (= 4.0.2)
   rails_12factor
   rspec-rails
-  sass (= 3.2.13)
   sass-rails (~> 4.0.0)
   sdoc
   simplecov (~> 0.7.1)
