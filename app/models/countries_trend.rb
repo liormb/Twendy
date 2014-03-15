@@ -41,10 +41,11 @@ class CountriesTrend < ActiveRecord::Base
 
 		# get a uniq 10 result array of trends id's as most popular comes first
 		#trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10).reverse
-		trends_ids = data.map { |record| record.trend_id if !trends.include? record.trend_id }.compact.shift(10).reverse
+		trends_ids = []
+		data.each { |record| trends_ids << record.trend_id if !trends_ids.include? record.trend_id }
 		
 		# for every uniq trend fetch a matching set of data that match the heat map
-		trends_ids.each_with_index.map { |id, index|
+		trends_ids.shift(10).reverse.each_with_index.map { |id, index|
 			self.process_data(data.map { |record| record if record.trend_id == id }.compact, id, index + 1)
 		}.flatten
 	end
