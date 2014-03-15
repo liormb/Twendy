@@ -39,13 +39,22 @@ class CountriesTrend < ActiveRecord::Base
 		# verifying that trends exists (if not, destroy the joiner record)
 		data.map! { |record| Trend.exists?(record.trend_id) ? record : record.destroy }.compact
 
-		# get a uniq 10 result array of trends id's as most popular comes first
-		#trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10).reverse
-		trends_ids = []
-		data.each { |record| trends_ids << record.trend_id if !trends_ids.include? record.trend_id }
-		
+		# OPTION I: current trends (get a uniq 10 result array of trends id's as most popular comes first)
+		trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10).reverse
+
+		# OPTION II: daily trends (get a uniq 10 result array of trend id's as most popular comes first)
+		trends_ranks = trends_ids.map do |trend_id|
+			[ trend_id, self.where("trend_id = ?", trend_id).inject { |sum, record| sum + record.rank } ]
+		end
+		trends_ids = trends_ranks.sort_by { |trend| trend[1] }.pop(10).map { |trend| trend[0] }
+
+
+		data.map do |country_trend|
+			country_trend.inject { |sum, record|  }
+		end
+
 		# for every uniq trend fetch a matching set of data that match the heat map
-		trends_ids.shift(10).reverse.each_with_index.map { |id, index|
+		trends_ids.each_with_index.map { |id, index|
 			self.process_data(data.map { |record| record if record.trend_id == id }.compact, id, index + 1)
 		}.flatten
 	end
