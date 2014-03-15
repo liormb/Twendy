@@ -48,7 +48,7 @@ class CountriesTrend < ActiveRecord::Base
 			trends_ids.map! do |trend_id|
 				[ trend_id, self.where("trend_id = ?", trend_id).inject(0) { |sum, record| sum + record.rank } ]
 			end
-			trends_ids = trends_ids.sort_by { |trend| trend[1] }.pop(10).map { |trend| trend[0] }
+			trends_ids = trends_ids.sort_by { |trend| trend[1] }.shift(10).map { |trend| trend[0] }
 		end
 
 		trends_ids = trends_ids.shift(10).reverse
