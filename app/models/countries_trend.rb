@@ -29,7 +29,7 @@ class CountriesTrend < ActiveRecord::Base
 		result
 	end
 
-	def self.heat_map(country)
+	def self.heat_map(country, daily=false)
 		country_id = Country.find_by_name(country).id || false
 		return false if !country_id  # return false if no country has been found 
 
@@ -40,18 +40,18 @@ class CountriesTrend < ActiveRecord::Base
 		data.map! { |record| Trend.exists?(record.trend_id) ? record : record.destroy }.compact
 
 		# OPTION I: current trends (get a uniq 10 result array of trends id's as most popular comes first)
-		trends_ids = data.map { |record| record.trend_id }.compact.uniq.shift(10).reverse
+		trends_ids = data.map { |record| record.trend_id }.compact
 
 		# OPTION II: daily trends (get a uniq 10 result array of trend id's as most popular comes first)
-		trends_ranks = trends_ids.map do |trend_id|
-			[ trend_id, self.where("trend_id = ?", trend_id).inject { |sum, record| sum + record.rank } ]
+		daily = true
+		if daily
+			trends_ids.map! do |trend_id|
+				[ trend_id, self.where("trend_id = ?", trend_id).inject(0) { |sum, record| sum + record.rank } ]
+			end
+			trends_ids = trends_ids.sort_by { |trend| trend[1] }.pop(10).map { |trend| trend[0] }
 		end
-		trends_ids = trends_ranks.sort_by { |trend| trend[1] }.pop(10).map { |trend| trend[0] }
 
-
-		data.map do |country_trend|
-			country_trend.inject { |sum, record|  }
-		end
+		trends_ids = trends_ids.uniq.shift(10).reverse
 
 		# for every uniq trend fetch a matching set of data that match the heat map
 		trends_ids.each_with_index.map { |id, index|
