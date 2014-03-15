@@ -66,17 +66,17 @@ function heatMap(error, data) {
   heatMap.append("title").text(function(d) { return d.rank; });
    
   // building the color legend   
-  // var legend = svg.selectAll(".legend")
-  //     .data([0].concat(colorScale.quantiles()), function(d) { return d; })
-  //     .enter().append("g")
-  //     .attr("class", "legend");
+  var legend = svg.selectAll(".legend")
+    .data([0].concat(colorScale.quantiles()), function(d) { return d; })
+    .enter().append("g")
+      .attr("class", "legend");
 
-  // legend.append("rect")
-  //   .attr("x", function(d, i) { return legendElementWidth * i; })
-  //   .attr("y", height)
-  //   .attr("width", legendElementWidth)
-  //   .attr("height", gridSize / 2)
-  //   .style("fill", function(d, i) { return colors[i]; });
+  legend.append("rect")
+    .attr("x", function(d, i) { return legendElementWidth * i; })
+    .attr("y", height)
+    .attr("width", legendElementWidth)
+    .attr("height", gridSize / 2)
+    .style("fill", function(d, i) { return colors[i]; });
 
   // legend.append("text")
   //   .attr("class", "mono")

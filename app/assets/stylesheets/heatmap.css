@@ -12,6 +12,9 @@
 	border-radius: 8px;
 	border: 1px solid rgb(220,220,220);
 	background: rgba(40,40,40,.7);
+	-moz-box-shadow: 1px 6px 12px 5px rgba(40,40,40,.2);
+  -webkit-box-shadow: 1px 6px 12px 5px rgba(40,40,40,.2);
+  box-shadow: 1px 6px 12px 5px rgba(40,40,40,.2);
 	z-index: 9999;
 }
 #close-heatmap-button:hover {
@@ -59,8 +62,6 @@
 	position: absolute;
 	top: 84px;
 	left: 40px;
-	width: 100%;
-	height: 100%;
 }
 .chart-container svg {
 	position: absolute;
