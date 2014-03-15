@@ -11,7 +11,7 @@ class CountriesTrend < ActiveRecord::Base
 
 		until interval > 24 do
 			# get all trends for that time cycle
-			trends = data.map {|record| record if time > record[:time_of_trend] && record[:time_of_trend] > (time - cycle) }.compact
+			trends = data.map {|record| record if record[:time_of_trend] <= time && record[:time_of_trend] > (time - cycle) }.compact
 
 			# get all ranks for those trends
 			ranks = trends.map {|trend| trend[:rank] }.compact
@@ -34,16 +34,17 @@ class CountriesTrend < ActiveRecord::Base
 		return false if !country_id  # return false if no country has been found 
 
 		# fetch country trends from the last 24 hours ordered by creation
-		data = self.where("country_id = ? AND time_of_trend > ?", country_id, Time.now - 86400).order('time_of_trend DESC')
+		data = self.where("country_id = ? AND time_of_trend >= ?", country_id, Time.now - 86400).order('time_of_trend DESC')
 		
 		# verifying that trends exists (if not, destroy the joiner record)
 		data.map! { |record| Trend.exists?(record.trend_id) ? record : record.destroy }.compact
 
 		# OPTION I: current trends (get a uniq 10 result array of trends id's as most popular comes first)
-		trends_ids = data.map { |record| record.trend_id }.compact.uniq
+		#trends_ids = data.map { |record| record.trend_id }.compact.uniq
+		trends_ids = data.sort_by { |record| record.time_of_trend }.map { |record| record.trend_id }.compact.pop(10) # coming in order by rank 1..10
 
 		# OPTION II: daily trends (get a uniq 10 result array of trend id's as most popular comes first)
-		daily = true
+		# daily = true
 		if daily
 			trends_ids.map! do |trend_id|
 				[ trend_id, self.where("trend_id = ?", trend_id).inject(0) { |sum, record| sum + record.rank } ]
@@ -51,7 +52,7 @@ class CountriesTrend < ActiveRecord::Base
 			trends_ids = trends_ids.sort_by { |trend| trend[1] }.shift(10).map { |trend| trend[0] }
 		end
 
-		trends_ids = trends_ids.shift(10).reverse
+		#trends_ids = trends_ids.shift(10).reverse
 
 		# for every uniq trend fetch a matching set of data that match the heat map
 		trends_ids.each_with_index.map { |id, index|
