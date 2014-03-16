@@ -15,10 +15,12 @@ class CountriesTrend < ActiveRecord::Base
 
 			# get all ranks for those trends
 			ranks = trends.map {|trend| trend[:rank] }.compact
-			ranks = [0] if ranks.empty?
+			ranks = [0,0] if ranks.empty?
 
-			# calculate an avarage rank and round the result
-			avarage_rank = (ranks.inject { |sum, rank| sum + rank }.to_f / ranks.length).floor
+			# calculate an avarage rank and round or floor the result
+			# floor when last rank is better and round vise versa
+			median = ranks.inject { |sum, rank| sum + rank }.to_f / ranks.length
+			avarage_rank = (ranks.length == 1) ? median.floor : (ranks[0] < ranks[1]) ? median.floor : median.round
 			
 			# build the dataset that will match the heat map requirments
 			result << { :"name" => my_trend.name, :"url" => my_trend.twitter_url, :"interval" => interval, :"trend" => index, :"rank" => avarage_rank }
