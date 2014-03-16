@@ -18,7 +18,7 @@ class CountriesTrend < ActiveRecord::Base
 			ranks = [0] if ranks.empty?
 
 			# calculate an avarage rank and round the result
-			avarage_rank = (ranks.inject { |sum, rank| sum + rank }.to_f / ranks.length).round
+			avarage_rank = (ranks.inject { |sum, rank| sum + rank }.to_f / ranks.length).floor
 			
 			# build the dataset that will match the heat map requirments
 			result << { :"name" => my_trend.name, :"url" => my_trend.twitter_url, :"interval" => interval, :"trend" => index, :"rank" => avarage_rank }
