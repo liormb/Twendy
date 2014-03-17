@@ -53,7 +53,8 @@ TrendsListView.prototype = {
 		}
 		for (var i=0; i < countriesCodes.length; i++){ 
 			if (countriesCodes[i]['name'] == country) {
-				$('.heatmap-bg').attr('src', "/assets/flags/" + countriesCodes[i]['code'].toLowerCase() + ".gif");
+				var baseURL = "http://www.geonames.org/flags/x/"; //"/assets/flags/";
+				$('.heatmap-bg').attr('src', baseURL + countriesCodes[i]['code'].toLowerCase() + ".gif");
 				break;
 			}
 		}
