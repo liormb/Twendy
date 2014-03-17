@@ -24,7 +24,7 @@
 	left: -1%;
 	width: 102%;
 	height: 102%;
-	opacity: .3;
+	opacity: .5;
 	z-index: -9999;
 }
 #close-heatmap-button:hover {
@@ -44,7 +44,7 @@
 	position: absolute;
 	bottom: 30px;
 	right: 0;
-	width: 360px;
+	width: 380px;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -54,7 +54,7 @@
 	color: white;
 	margin: 0;
 	padding-left: 20px;
-	font-size: 20px;
+	font-size: 25px;
 	line-height: 50px;
 	transition: all 0.4s;
 }
