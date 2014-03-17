@@ -75,6 +75,7 @@
 }
 .chart-container svg {
 	position: absolute;
+	background: rgba(40,40,40,.8);
 }
 rect.bordered {
   stroke: rgb(200,200,200);
