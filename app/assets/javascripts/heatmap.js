@@ -14,7 +14,7 @@ function heatMap(error, data) {
 
   // building the color scale palete
   var colorScale = d3.scale.quantile()
-    .domain([0, 5, d3.max(data, function(d) { return d.rank; })])
+    .domain([0, 5, d3.max(data, function(d){ return d.rank; })])
     .range(colors);
 
   // building the chart
@@ -63,7 +63,7 @@ function heatMap(error, data) {
   heatMap.style("fill", function(d) { return colorScale(d.rank); });
 
   // adding title to every rectangle
-  heatMap.append("title").text(function(d) { return d.rank; });
+  // heatMap.append("title").text(function(d) { return d.rank; });
    
   // building the color legend   
   var legend = svg.selectAll(".legend")
@@ -83,6 +83,29 @@ function heatMap(error, data) {
   //   .text(function(d, i) { return (i < 10) ? "rank " + Math.round(i+1) : "Not Ranked"; })
   //   .attr("x", function(d, i) { return legendElementWidth * i; })
   //   .attr("y", height + gridSize);
+
+  var tooltip = d3.select('.heatmap-container')
+    .append('span')
+    .attr('class', 'trend-tooltip');
+
+  heatMap
+    .on("mouseover", function(d){
+      tooltip.text(function(){
+        return (d.rank) ? "rank " + d.rank : '';
+      })
+      .style('top', (d3.event.pageY - 110) + 'px')
+      .style('left', (d3.event.pageX - 200) + 'px')
+      .style('display', function(){
+        return (d.rank) ? 'block' : 'none';
+      });
+    })
+    .on('mousemove', function(d){
+      tooltip.style('top', (d3.event.pageY - 110) + 'px')
+      .style('left', (d3.event.pageX - 200) + 'px');
+    })
+    .on("mouseout", function(d){
+      tooltip.style('display', 'none');
+    });
 }
 
 function eventHandler() {

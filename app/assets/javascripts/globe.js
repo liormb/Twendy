@@ -1,17 +1,16 @@
 
-function drawGlobe(twitter_countries) {
+function drawGlobe(twitterCountries) {
 
 	var width = screen.width;
 	var height = screen.height - 100;
 
-	var scale_factor = 5;
+	var scaleFactor = 5;
 	var sens = 0.25;
-	var centered;
-	var showHeatMap;
-
 	var autoRotate = true;
 	var speed = -1e-2;
   var start = Date.now();
+  var centered;
+	var showHeatMap;
 
 	var svg = d3.select(".globe-container")
 		.append('svg')
@@ -19,7 +18,7 @@ function drawGlobe(twitter_countries) {
 			.attr('height', height);
 
 	var projection = d3.geo.orthographic()
-		.scale(width / scale_factor)
+		.scale(width / scaleFactor)
 		.translate([width / 2, height / 2])
 		.rotate([0, -30])
 		.clipAngle(95);
@@ -63,11 +62,10 @@ function drawGlobe(twitter_countries) {
 
 		// draw all the globe's countries
 		var globe = groupPaths.selectAll('.country')
-			.data(countries)
-			.enter()
-				.append('path')
+			.data(countries).enter()
+			.append('path')
 				.attr('class', function(d) {
-					return (twitter_countries.indexOf(d.name) == -1) ? 'country' : 'country twitter-country';
+					return (twitterCountries.indexOf(d.name) == -1) ? 'country' : 'country twitter-country';
 				})
 				.attr('d', path);
 
@@ -88,7 +86,7 @@ function drawGlobe(twitter_countries) {
 	      	.style('left', (d3.event.pageX + 7) + 'px')
 	      	.style('display', 'block');
 
-				if (twitter_countries.indexOf(d.name) > -1) {
+				if (twitterCountries.indexOf(d.name) > -1) {
 					groupPaths.selectAll("path")
 						.classed('active-country', false);
 				}
@@ -101,11 +99,12 @@ function drawGlobe(twitter_countries) {
 				tooltip.style('display', 'none');
 			})
 			.on('click', function(d){
-				if (d3.event.defaultPrevented) return; // click suppressed
+				// click suppressed for drags events
+				if (d3.event.defaultPrevented) return;
+
+				autoRotate = false;
 				tooltip.style('display', 'none');
 				
-				autoRotate = false;
-
 		    d3.transition()
 		      .duration(400)
 		      .tween("rotate", function() {
@@ -157,7 +156,7 @@ function drawGlobe(twitter_countries) {
 					    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
 					    .style("stroke-width", 1.5 / k + "px")
 					    .each("end", function(){
-					    	if (showHeatMap && twitter_countries.indexOf(d.name) > -1) {
+					    	if (showHeatMap && twitterCountries.indexOf(d.name) > -1) {
 					    		var trends_list = new TrendsList;
 									trends_list.fetch(d.name);
 					    	} else {
@@ -180,10 +179,6 @@ function drawGlobe(twitter_countries) {
 	      projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
 	      svg.selectAll('path').attr('d', path);
 	    }));
-
-		// adding title to every country - optional
-		// globe.append('title')
-		// 	.text(function(d) { return d.name; });
 
 	} // end of ready function
 } // end of drawGlobe function

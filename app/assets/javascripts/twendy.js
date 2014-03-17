@@ -43,13 +43,19 @@ function TrendsListView(){
 TrendsListView.prototype = { 
 	render: function(trends, country) {
 		var $header = $('.heatmap-container h1').empty();
-		var $countries = $('.countries-list').empty();
+		var $trendsList = $('.trends-list').empty();
     var $chart  = $('.chart-container').empty();
     $header.text(country);
 		heatMap([],trends);
 		for (var i=0; i < trends.length; i += 12) {
 			var name = trends[i].name.replace("#", "").substr(0, 22);
-			$countries.append("<li><span>#</span>" + name + "</li>");
+			$trendsList.append("<li><span>#</span>" + name + "</li>");
+		}
+		for (var i=0; i < countriesCodes.length; i++){ 
+			if (countriesCodes[i]['name'] == country) {
+				$('.heatmap-bg').attr('src', "/assets/flags/" + countriesCodes[i]['code'].toLowerCase() + ".gif");
+				break;
+			}
 		}
 		$('.heatmap-container').fadeIn(300);
 	}
