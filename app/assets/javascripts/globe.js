@@ -1,6 +1,6 @@
 
 function drawGlobe(twitterCountries) {
-
+	
 	var width = screen.width;
 	var height = screen.height - 100;
 
@@ -8,7 +8,8 @@ function drawGlobe(twitterCountries) {
 	var sens = 0.25;
 	var autoRotate = true;
 	var speed = -1e-2;
-  var start = Date.now();
+ 	var start = Date.now();
+ 	var stop = 0;
   var centered;
 	var showHeatMap;
 
@@ -17,7 +18,7 @@ function drawGlobe(twitterCountries) {
 			.attr('width', width)
 			.attr('height', height);
 
-	var projection = d3.geo.orthographic()
+	projection = d3.geo.orthographic()
 		.scale(width / scaleFactor)
 		.translate([width / 2, height / 2])
 		.rotate([0, -30])
@@ -73,9 +74,21 @@ function drawGlobe(twitterCountries) {
 		d3.timer(function(){
 			if (autoRotate) {
 				var rotate = projection.rotate();
-	    	projection.rotate([speed * (Date.now() - start), -15]);
+	    	projection.rotate([speed * (Date.now() - start) + stop, -15]);
 	    	groupPaths.selectAll('path').attr('d', path);
 	  	}
+		});
+
+		// change globe rotating direction
+		$('#rotate-left-button').on('click', function(){
+			stop = speed * (Date.now() - start) + stop;
+			start = Date.now();
+			speed = -1e-2;
+		});
+		$('#rotate-right-button').on('click', function(){
+			stop = speed * (Date.now() - start) + stop;
+			start = Date.now();
+			speed = 1e-2;
 		});
 
 		// events processing
@@ -104,12 +117,15 @@ function drawGlobe(twitterCountries) {
 
 				autoRotate = false;
 				tooltip.style('display', 'none');
+				$('#rotate-left-button').fadeOut(300);
+				$('#rotate-right-button').fadeOut(300);
 				
 		    d3.transition()
 		      .duration(400)
 		      .tween("rotate", function() {
-		        var p = d3.geo.centroid(d),
-		            r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
+		        var p = d3.geo.centroid(d);
+		        var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
+		        stop = -p[0];
 		        return function(t) {
 		          projection.rotate(r(t));
 		          svg.selectAll('path').attr('d', path);
@@ -135,7 +151,7 @@ function drawGlobe(twitterCountries) {
 					    d3.transition()
 					      .duration(800)
 					      .tween("rotate", function() {
-					        r = d3.interpolate(projection.rotate(), [0, -15]);
+					        r = d3.interpolate(projection.rotate(), [stop, -15]);
 					        return function(t) {
 					          projection.rotate(r(t));
 					          groupPaths.selectAll('path').attr('d', path);
@@ -145,6 +161,8 @@ function drawGlobe(twitterCountries) {
 					  		.each("end", function(){
 		    					start = Date.now();
 		    					autoRotate = true;
+		    					$('#rotate-left-button').fadeIn(300);
+									$('#rotate-right-button').fadeIn(300);
 					  		});
 					  }
 
