@@ -70,33 +70,32 @@
 }
 .chart-container {
 	position: absolute;
-	top: 94px;
+	top: 0;
 	left: 30px;
 }
 .chart-container svg {
 	position: absolute;
-	background: rgba(40,40,40,.8);
 }
 rect.bordered {
   stroke: rgb(200,200,200);
-  stroke-width:2px;
+  stroke-width: 2px;
   transition: all 0.4s;
 }
 rect.bordered:hover {
   stroke: #E6E6E6;
   stroke: #FFF;
 }
-text.mono {
-  font-size: 9pt;
+/*text.mono {
+  font-size: 4px;
   font-family: Consolas, courier;
-  fill: #000;
-}
-text.axis-workweek {
+  fill: #fff;
+}*/
+/*text.axis-workweek {
   fill: #000;
 }
 text.axis-worktime {
   fill: #000;
-}
+}*/
 .trend-tooltip {
   position: absolute;
   display: none;
@@ -112,4 +111,9 @@ text.axis-worktime {
   -moz-border-radius: 5px;
   border-radius: 5px;  
   z-index: 99999;
+}
+text.intervalLabel {
+	color: red;
+	font-size: 4px;
+	z-index: 99999999;
 }
