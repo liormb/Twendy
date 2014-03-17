@@ -4,9 +4,12 @@ function drawGlobe(twitterCountries) {
 	var width = screen.width;
 	var height = screen.height - 100;
 
+	var $arrows = $('.rotate-button');
 	var scaleFactor = 5;
 	var sens = 0.25;
 	var autoRotate = true;
+	var elipseTime = false;
+	var angle = -15;
 	var speed = -1e-2;
  	var start = Date.now();
  	var stop = 0;
@@ -21,7 +24,7 @@ function drawGlobe(twitterCountries) {
 	projection = d3.geo.orthographic()
 		.scale(width / scaleFactor)
 		.translate([width / 2, height / 2])
-		.rotate([0, -30])
+		.rotate([0, angle * 2])
 		.clipAngle(95);
 
 	var graticule = d3.geo.graticule();
@@ -74,21 +77,25 @@ function drawGlobe(twitterCountries) {
 		d3.timer(function(){
 			if (autoRotate) {
 				var rotate = projection.rotate();
-	    	projection.rotate([speed * (Date.now() - start) + stop, -15]);
+	    	projection.rotate([speed * (Date.now() - start) + stop, angle]);
 	    	groupPaths.selectAll('path').attr('d', path);
 	  	}
 		});
 
 		// change globe rotating direction
-		$('#rotate-left-button').on('click', function(){
+		$arrows.on('click', function(event){
+			if (elipseTime) {	
+				start = Date.now();
+				elipseTime = false;
+			}
 			stop = speed * (Date.now() - start) + stop;
 			start = Date.now();
-			speed = -1e-2;
-		});
-		$('#rotate-right-button').on('click', function(){
-			stop = speed * (Date.now() - start) + stop;
-			start = Date.now();
-			speed = 1e-2;
+
+			speed = (event.target.id == 'rotate-left') ? -1e-2 : 1e-2;
+			if ((angle <= -90 && angle > -270) || (angle >= 90 && angle < 270)) 
+				speed = (speed == 1e-2) ? -1e-2 : 1e-2;
+
+			autoRotate = true;
 		});
 
 		// events processing
@@ -117,8 +124,7 @@ function drawGlobe(twitterCountries) {
 
 				autoRotate = false;
 				tooltip.style('display', 'none');
-				$('#rotate-left-button').fadeOut(300);
-				$('#rotate-right-button').fadeOut(300);
+				$arrows.fadeOut(300);
 				
 		    d3.transition()
 		      .duration(400)
@@ -151,7 +157,7 @@ function drawGlobe(twitterCountries) {
 					    d3.transition()
 					      .duration(800)
 					      .tween("rotate", function() {
-					        r = d3.interpolate(projection.rotate(), [stop, -15]);
+					        r = d3.interpolate(projection.rotate(), [stop, angle]);
 					        return function(t) {
 					          projection.rotate(r(t));
 					          groupPaths.selectAll('path').attr('d', path);
@@ -161,8 +167,7 @@ function drawGlobe(twitterCountries) {
 					  		.each("end", function(){
 		    					start = Date.now();
 		    					autoRotate = true;
-		    					$('#rotate-left-button').fadeIn(300);
-									$('#rotate-right-button').fadeIn(300);
+		    					$arrows.fadeIn(300);
 					  		});
 					  }
 
@@ -196,6 +201,12 @@ function drawGlobe(twitterCountries) {
 	      var rotate = projection.rotate();
 	      projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
 	      svg.selectAll('path').attr('d', path);
+	      angle = -d3.event.y * sens;
+	      while (angle >= 360 || angle <= -360){ 
+	      	(angle > 0) ? angle -= 360 : angle += 360; 
+	      }
+	      stop = d3.event.x * sens;
+	      elipseTime = true;
 	    }));
 
 	} // end of ready function

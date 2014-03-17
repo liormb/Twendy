@@ -17,12 +17,10 @@ html {
 	background-size: cover;
 	z-index: 999999;
 }
-#rotate-left-button, 
-#rotate-right-button {
+.rotate-button {
 	position: absolute;
 	top: 320px;
 	left: 320px;
-	background: url(image-path('left-arrow.png')) 0 0 no-repeat;
 	width: 48px;
 	height: 80px;
 	text-indent: 200%;
@@ -30,13 +28,15 @@ html {
 	border: none;
 	z-index: 99999;
 }
-#rotate-right-button {
+#rotate-left {
+	background: url(image-path('left-arrow.png')) 0 0 no-repeat;
+}
+#rotate-right {
 	background: url(image-path('right-arrow.png')) 0 0 no-repeat;
 	left: auto;
 	right: 320px;
 }
-#rotate-left-button:hover, 
-#rotate-right-button:hover {
+.rotate-button:hover {
 	top: 322px;
 	cursor: pointer;
 }
