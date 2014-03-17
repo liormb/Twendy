@@ -16,5 +16,5 @@
 //= require d3.min
 //= require queue.min
 //= require topojson
-//= require countriesCodes
+//= require countriesCodes.js
 //= require_tree .
