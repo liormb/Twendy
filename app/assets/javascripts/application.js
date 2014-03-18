@@ -16,5 +16,4 @@
 //= require d3.min
 //= require queue.min
 //= require topojson
-//= require marquee
 //= require_tree .
