@@ -85,17 +85,6 @@ rect.bordered:hover {
   stroke: #E6E6E6;
   stroke: #FFF;
 }
-/*text.mono {
-  font-size: 4px;
-  font-family: Consolas, courier;
-  fill: #fff;
-}*/
-/*text.axis-workweek {
-  fill: #000;
-}
-text.axis-worktime {
-  fill: #000;
-}*/
 .trend-tooltip {
   position: absolute;
   display: none;

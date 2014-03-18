@@ -15,6 +15,8 @@
   top: 0;
   left: 0;
   fill: #fff;
+  border-top: 10px solid white;
+  border-bottom: 10px solid white;
 }
 .sphere {
   fill: none;
@@ -25,9 +27,9 @@
 }
 .graticule {
   fill: none;
-  stroke: #777;
+  stroke: #fff;
   stroke-width: .4px;
-  stroke-opacity: .4;
+  stroke-opacity: .3;
 }
 .country {
   fill: #dadac4;

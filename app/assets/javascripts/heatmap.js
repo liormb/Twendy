@@ -5,7 +5,8 @@ function heatMap(error, data) {
   var margin = { top: 94, right: 0, bottom: 0, left: 0 };
   var width  = (gridSize + rectMargin) * 12 - rectMargin;
   var height = (gridSize + rectMargin) * 10 - rectMargin + 30;
-	var colors = ['rgba(120,120,120,.7)','#e56230','#dc7840','#d38b52','#c0a265','#a8b778','#89ca8c','#77c79f','#61c4b2','#45c1c4','#45a9c4'];
+  var colors = ['rgba(120,120,120,.7)','rgb(136,0,66)','rgb(186,62,77)','rgb(217,108,64)','rgb(235,173,95)','rgb(247,224,137)','rgb(247,251,169)','rgb(234,246,151)','rgb(185,221,163)','rgb(134,193,165)','rgb(84,134,188)'];
+	//var colors = ['rgba(120,120,120,.7)','#e56230','#dc7840','#d38b52','#c0a265','#a8b778','#89ca8c','#77c79f','#61c4b2','#45c1c4','#45a9c4'];
 	var intervals = ["now", "2 hr", "4 hr", "6 hr", "10 hr", "12 hr", "14 hr", "16 hr", "18 hr", "20 hr", "22 hr", "24 hr"];
 
   // building the color scale palete

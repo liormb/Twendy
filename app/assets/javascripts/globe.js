@@ -2,7 +2,7 @@
 function drawGlobe(twitterCountries) {
 	
 	var width = screen.width;
-	var height = screen.height - 100;
+	var height = screen.height - 140;
 
 	var $arrows = $('.rotate-button');
 	var scaleFactor = 5;
