@@ -33,7 +33,7 @@ class CountriesTrend < ActiveRecord::Base
 
 	def self.heat_map(country, daily=false)
 		time = Time.now #self.all.sort_by(&:time_of_trend)[-1][:time_of_trend]
-		country_id = Country.find_by_name(country).id || false
+		country_id = Country.find_by_name(country).nil? ? false : Country.find_by_name(country).id
 		return false if !country_id  # return false if no country has been found 
 
 		# fetch country trends from the last 24 hours ordered by creation

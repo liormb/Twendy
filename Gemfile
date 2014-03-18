@@ -25,6 +25,7 @@ gem 'pry-rails'
 gem 'rspec-rails'
 gem 'capybara'
 gem 'simplecov', '~> 0.7.1'
+# gem 'simplecov', :require => false, :group => :test
 
 # ------ Heroku warnings ------
 
