@@ -127,7 +127,7 @@ function drawGlobe(twitterCountries) {
 				$arrows.fadeOut(300);
 				
 		    d3.transition()
-		      .duration(600)
+		      .duration(300)
 		      .tween("rotate", function() {
 		        var p = d3.geo.centroid(d);
 		        var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
@@ -155,7 +155,7 @@ function drawGlobe(twitterCountries) {
 					    showHeatMap = false;
 
 					    d3.transition()
-					      .duration(600)
+					      .duration(800)
 					      .tween("rotate", function() {
 					        r = d3.interpolate(projection.rotate(), [stop, angle]);
 					        return function(t) {

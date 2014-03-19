@@ -23,6 +23,7 @@ TrendsList.prototype = {
 			dataType: "json",
 			data: { name: country },
 			success: function(data) {
+				test = data;
 				$.each(data, function(index, trend) {
 					var new_trend = new Trend(trend.name, trend.twitter_url, trend.trend, trend.interval, trend.rank);
 					self.add(new_trend);
