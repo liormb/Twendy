@@ -16,6 +16,7 @@ function drawGlobe(twitterCountries) {
  	var start = Date.now();
  	var stop = 0;
   var centered;
+  var lastCountry;
 	var showHeatMap;
 
 	var svg = d3.select(".globe-container")
@@ -71,7 +72,8 @@ function drawGlobe(twitterCountries) {
 			.data(countries).enter()
 			.append('path')
 				.attr('class', function(d) {
-					return (twitterCountries.indexOf(d.name) == -1) ? 'country' : 'country twitter-country';
+					var className = 'country ' + d.name.replace(/\s+/g, '-');
+					return (twitterCountries.indexOf(d.name) > -1) ? className + ' twitter-country' : className;
 				})
 				.attr('d', path);
 
@@ -107,11 +109,6 @@ function drawGlobe(twitterCountries) {
 					.style('top', (d3.event.pageY - 15) + 'px')
 	      	.style('left', (d3.event.pageX + 7) + 'px')
 	      	.style('display', 'block');
-
-				if (twitterCountries.indexOf(d.name) > -1) {
-					groupPaths.selectAll("path")
-						.classed('active-country', false);
-				}
 			})
 			.on('mousemove', function(d){
 				tooltip.style('top', (d3.event.pageY - 15) + 'px')
@@ -124,10 +121,14 @@ function drawGlobe(twitterCountries) {
 				// click suppressed for drags events
 				if (d3.event.defaultPrevented) return;
 
-				autoRotate = false;
-				tooltip.style('display', 'none');
-				$arrows.fadeOut(300);
+				if (lastCountry) lastCountry.classList.remove('selected-country');
+				this.classList.add('selected-country');
+				lastCountry = this;
+
 				sens = zoomInSens;
+				autoRotate = false;
+				tooltip.style('display','none');
+				$arrows.fadeOut(300);
 				
 		    d3.transition()
 		      .duration(function(){
@@ -165,7 +166,6 @@ function drawGlobe(twitterCountries) {
 					    d3.transition()
 					      .duration(800)
 					      .tween("rotate", function() {
-					      	console.log("2st duration");
 					        r = d3.interpolate(projection.rotate(), [stop, angle]);
 					        return function(t) {
 					          projection.rotate(r(t));
@@ -174,15 +174,13 @@ function drawGlobe(twitterCountries) {
 					      })
 					    	.transition()
 					  		.each("end", function(){
+					  			sens = zoomOutSens;
 		    					start = Date.now();
 		    					autoRotate = true;
+		    					lastCountry.classList.remove('selected-country');
 		    					$arrows.fadeIn(300);
-		    					sens = zoomOutSens;
 					  		});
-					  }
-
-					  groupPaths.selectAll("path")
-					    .classed("active-country", centered && function(d) { return d === centered; });
+					  };
 
 					  groupPaths.transition()
 					    .duration(800)
@@ -192,9 +190,6 @@ function drawGlobe(twitterCountries) {
 					    	if (showHeatMap && twitterCountries.indexOf(d.name) > -1) {
 					    		var trends_list = new TrendsList;
 									trends_list.fetch(d.name);
-					    	} else {
-					    		groupPaths.selectAll("path")
-					    			.classed("active-country", false);
 					    	}
 					    });
 				  });

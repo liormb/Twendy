@@ -30,6 +30,16 @@
 #close-heatmap-button:hover {
 	background-position: -48px 0;
 }
+.heatmap-container h1 {
+	position: absolute;
+	top: 8px;
+	left: 30%;
+	width: 40%;
+	font-size: 36px;
+	line-height: 36px;
+	text-align: center;
+	color: white;
+}
 .legend-bar {
 	position: absolute;
 	top: 69px;
@@ -49,16 +59,6 @@
 }
 .legend-bar span:last-child {
 	margin-left: 166px;
-}
-.heatmap-container h1 {
-	position: absolute;
-	top: 8px;
-	left: 30%;
-	width: 40%;
-	font-size: 36px;
-	line-height: 36px;
-	text-align: center;
-	color: white;
 }
 .trends-list {
 	position: absolute;

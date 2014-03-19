@@ -33,19 +33,23 @@
 }
 .country {
   fill: #dadac4;
-  stroke: #666;
-  stroke-width: 0.5px;
+  stroke: rgb(140,140,140);
+  stroke-width: 0.4px;
   transition: all 0.4s;
 }
 .country:hover {
-  fill: #e56230;
+  fill: rgb(249,118,68);
   cursor: pointer;
+}
+.selected-country {
+  fill: #e56230 !important;
+  transition: all 0.4s;
+}
+.selected-country:hover {
+  fill: rgb(249,118,68) !important;
 }
 .twitter-country {
   fill: rgb(115,169,238);
-}
-.active-country {
-  fill: #e56230;
 }
 .country-tooltip {
   position: absolute;
