@@ -5,7 +5,7 @@ class CountriesTrend < ActiveRecord::Base
 	def self.process_data(data, trend_id, index)
 		result = []
 		interval = 2 # check trend every 2 hours
-		time = Time.now #self.all.sort_by(&:time_of_trend)[-1][:time_of_trend]
+		time = self.all.sort_by(&:time_of_trend)[-1][:time_of_trend] # Time.now #
 		cycle = 60 * 60 * 2 # two hours cycle
 		my_trend = Trend.find(trend_id)
 
@@ -32,7 +32,7 @@ class CountriesTrend < ActiveRecord::Base
 	end
 
 	def self.heat_map(country, daily=false)
-		time = Time.now #self.all.sort_by(&:time_of_trend)[-1][:time_of_trend]
+		time = self.all.sort_by(&:time_of_trend)[-1][:time_of_trend] # Time.now #
 		country_id = Country.find_by_name(country).nil? ? false : Country.find_by_name(country).id
 		return false if !country_id  # return false if no country has been found 
 

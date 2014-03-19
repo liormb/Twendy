@@ -49,16 +49,17 @@ TrendsListView.prototype = {
 		heatMap([],trends);
 		for (var i=0; i < trends.length; i += 12) {
 			var name = trends[i].name.replace("#", "").substr(0, 22);
-			$trendsList.append("<li><span>#</span>" + name + "</li>");
+			var url = trends[i].twitter_url;
+			$trendsList.append("<li><a href='" + url + "' target='_blank'><span>#</span>" + name + "</a></li>");
 		}
 		for (var i=0; i < countriesCodes.length; i++){ 
 			if (countriesCodes[i]['name'] == country) {
-				var baseURL = "http://www.geonames.org/flags/x/"; //"/assets/flags/";
+				var baseURL = "http://www.geonames.org/flags/x/";
 				$('.heatmap-bg').attr('src', baseURL + countriesCodes[i]['code'].toLowerCase() + ".gif");
 				break;
 			}
 		}
-		$('.heatmap-container').fadeIn(300);
+		$('.heatmap-container').fadeIn(200);
 	}
 }
 

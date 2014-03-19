@@ -51,21 +51,24 @@
 	z-index: 9999;
 }
 .trends-list li {
-	color: white;
 	margin: 0;
 	padding-left: 20px;
 	font-size: 25px;
 	line-height: 50px;
-	transition: all 0.4s;
 }
-.trends-list li:hover {
+.trends-list a {
+	transition: all 0.2s;
+	text-decoration: none;
+	color: white;
+}
+.trends-list a:hover {
 	color: #e56230;
 	cursor: pointer;
 }
-.trends-list span {
+.trends-list a span {
 	color: #e56230;
 }
-.trends-list li:hover span {
+.trends-list a:hover span {
 	color: white;
 }
 .chart-container {

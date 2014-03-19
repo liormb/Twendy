@@ -39,7 +39,7 @@ namespace :db do
         end
       end
       country.trends_updated = Time.now
-      country.save!
+      country.save
     end
 
     Rake::Task["db:clear_old_trends"].execute
