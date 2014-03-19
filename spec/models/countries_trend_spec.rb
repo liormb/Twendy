@@ -73,13 +73,50 @@ describe CountriesTrend do
 			end			
 		end
 
-		describe "retrieve the heat-map format data" do
+		describe "test the heat_map method" do
 			it "given a non-existing country name" do
 				CountriesTrend.heat_map("non_existing_country_name").should == false
 			end
 
 			it "given an existing country name sould return an array" do
 				CountriesTrend.heat_map(@country.name, true).instance_of?(Array).should == true
+			end
+		end
+
+		describe "calling the heat_map method" do
+			before do
+				name = "World"
+				@result = CountriesTrend.heat_map(name)
+			end
+
+			it "return 12 objects per trend's country" do
+				expect(@result.count).to eq(24)
+			end
+
+			it "every object result will have a name, twitter_url, interval, trend and rank" do
+				@result.each do |object|
+					expect(object).to have_key(:name)
+					expect(object).to have_key(:twitter_url)
+					expect(object).to have_key(:interval)
+					expect(object).to have_key(:trend)
+					expect(object).to have_key(:rank)
+				end
+			end
+
+			it "return each trend with 12 different time interval" do
+				@result.each_with_index do |object, index|
+					if index < @result.length - 1
+						expect(@result[index][:interval]).not_to eq(@result[index+1][:interval])
+					end
+				end
+			end
+		end
+
+		describe "calling the process_data method" do
+			it "will return an Array" do
+				data = CountriesTrend.where("country_id = ?", @country.id)
+				result = CountriesTrend.process_data(data, @trends[0].id, 1)
+				expect(result).to be_kind_of(Array)
 			end
 		end
   end

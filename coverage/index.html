@@ -14,7 +14,7 @@
       <img src="./assets/0.7.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2014-03-19T13:34:06-04:00">2014-03-19T13:34:06-04:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2014-03-19T18:52:48-04:00">2014-03-19T18:52:48-04:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,7 +25,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         6.66
+         11.27
        </span>
     </span> hits/line)
   </h2>
@@ -97,7 +97,7 @@
         <td>31</td>
         <td>31</td>
         <td>0</td>
-        <td>35.8</td>
+        <td>66.7</td>
       </tr>
       
       <tr>
@@ -107,7 +107,7 @@
         <td>7</td>
         <td>7</td>
         <td>0</td>
-        <td>3.9</td>
+        <td>5.3</td>
       </tr>
       
       <tr>
@@ -190,7 +190,7 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         13.57
+         24.33
        </span>
     </span> hits/line)
   </h2>
@@ -222,7 +222,7 @@
         <td>31</td>
         <td>31</td>
         <td>0</td>
-        <td>35.8</td>
+        <td>66.7</td>
       </tr>
       
       <tr>
@@ -232,7 +232,7 @@
         <td>7</td>
         <td>7</td>
         <td>0</td>
-        <td>3.9</td>
+        <td>5.3</td>
       </tr>
       
       <tr>
@@ -730,32 +730,32 @@
           <code class="ruby">	def self.process_data(data, trend_id, index)</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="6">
-          <span class="hits">8</span>
+        <li class="covered" data-hits="15" data-linenumber="6">
+          <span class="hits">15</span>
           
           <code class="ruby">		result = []</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="7">
-          <span class="hits">8</span>
+        <li class="covered" data-hits="15" data-linenumber="7">
+          <span class="hits">15</span>
           
           <code class="ruby">		interval = 2 # check trend every 2 hours</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="8">
-          <span class="hits">8</span>
+        <li class="covered" data-hits="15" data-linenumber="8">
+          <span class="hits">15</span>
           
           <code class="ruby">		time = Time.now</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="9">
-          <span class="hits">8</span>
+        <li class="covered" data-hits="15" data-linenumber="9">
+          <span class="hits">15</span>
           
           <code class="ruby">		cycle = 60 * 60 * 2 # two hours cycle</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="10">
-          <span class="hits">8</span>
+        <li class="covered" data-hits="15" data-linenumber="10">
+          <span class="hits">15</span>
           
           <code class="ruby">		my_trend = Trend.find(trend_id)</code>
         </li>
@@ -766,8 +766,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="12">
-          <span class="hits">8</span>
+        <li class="covered" data-hits="15" data-linenumber="12">
+          <span class="hits">15</span>
           
           <code class="ruby">		until interval &gt; 24 do</code>
         </li>
@@ -778,8 +778,8 @@
           <code class="ruby">			# get all trends for that time cycle</code>
         </li>
       
-        <li class="covered" data-hits="192" data-linenumber="14">
-          <span class="hits">192</span>
+        <li class="covered" data-hits="372" data-linenumber="14">
+          <span class="hits">372</span>
           
           <code class="ruby">			trends = data.map {|record| record if record[:time_of_trend] &lt;= time &amp;&amp; record[:time_of_trend] &gt; (time - cycle) }.compact</code>
         </li>
@@ -796,14 +796,14 @@
           <code class="ruby">			# get all ranks for those trends</code>
         </li>
       
-        <li class="covered" data-hits="104" data-linenumber="17">
-          <span class="hits">104</span>
+        <li class="covered" data-hits="196" data-linenumber="17">
+          <span class="hits">196</span>
           
           <code class="ruby">			ranks = trends.map {|trend| trend[:rank] }.compact</code>
         </li>
       
-        <li class="covered" data-hits="96" data-linenumber="18">
-          <span class="hits">96</span>
+        <li class="covered" data-hits="180" data-linenumber="18">
+          <span class="hits">180</span>
           
           <code class="ruby">			ranks = [0,0] if ranks.empty?</code>
         </li>
@@ -826,14 +826,14 @@
           <code class="ruby">			# floor when last rank is better and round vise versa</code>
         </li>
       
-        <li class="covered" data-hits="184" data-linenumber="22">
-          <span class="hits">184</span>
+        <li class="covered" data-hits="346" data-linenumber="22">
+          <span class="hits">346</span>
           
           <code class="ruby">			median = ranks.inject { |sum, rank| sum + rank }.to_f / ranks.length</code>
         </li>
       
-        <li class="covered" data-hits="96" data-linenumber="23">
-          <span class="hits">96</span>
+        <li class="covered" data-hits="180" data-linenumber="23">
+          <span class="hits">180</span>
           
           <code class="ruby">			avarage_rank = (ranks.length == 1) ? median.floor : (ranks[0] &lt; ranks[1]) ? median.floor : median.round</code>
         </li>
@@ -850,8 +850,8 @@
           <code class="ruby">			# build the dataset that will match the heat map requirments</code>
         </li>
       
-        <li class="covered" data-hits="96" data-linenumber="26">
-          <span class="hits">96</span>
+        <li class="covered" data-hits="180" data-linenumber="26">
+          <span class="hits">180</span>
           
           <code class="ruby">			result &lt;&lt; { :&quot;name&quot; =&gt; my_trend.name, :&quot;twitter_url&quot; =&gt; my_trend.twitter_url, :&quot;interval&quot; =&gt; interval, :&quot;trend&quot; =&gt; index, :&quot;rank&quot; =&gt; avarage_rank }</code>
         </li>
@@ -862,14 +862,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="96" data-linenumber="28">
-          <span class="hits">96</span>
+        <li class="covered" data-hits="180" data-linenumber="28">
+          <span class="hits">180</span>
           
           <code class="ruby">			time -= cycle # set time as 2 hours before</code>
         </li>
       
-        <li class="covered" data-hits="96" data-linenumber="29">
-          <span class="hits">96</span>
+        <li class="covered" data-hits="180" data-linenumber="29">
+          <span class="hits">180</span>
           
           <code class="ruby">			interval += 2 # next interval</code>
         </li>
@@ -880,8 +880,8 @@
           <code class="ruby">		end</code>
         </li>
       
-        <li class="covered" data-hits="8" data-linenumber="31">
-          <span class="hits">8</span>
+        <li class="covered" data-hits="15" data-linenumber="31">
+          <span class="hits">15</span>
           
           <code class="ruby">		result</code>
         </li>
@@ -904,14 +904,14 @@
           <code class="ruby">	def self.heat_map(country, daily=false)</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="35">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="8" data-linenumber="35">
+          <span class="hits">8</span>
           
           <code class="ruby">		country_id = Country.find_by_name(country).nil? ? false : Country.find_by_name(country).id</code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="36">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="8" data-linenumber="36">
+          <span class="hits">8</span>
           
           <code class="ruby">		return false if !country_id  # return false if no country has been found </code>
         </li>
@@ -928,8 +928,8 @@
           <code class="ruby">		# fetch country trends from the last 24 hours ordered by creation</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="39">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="7" data-linenumber="39">
+          <span class="hits">7</span>
           
           <code class="ruby">		data = self.where(&quot;country_id = ? AND time_of_trend &gt;= ?&quot;, country_id, Time.now - 86400).order(&#39;time_of_trend DESC&#39;)</code>
         </li>
@@ -946,8 +946,8 @@
           <code class="ruby">		# verifying that trends exists (if not, destroy the joiner record)</code>
         </li>
       
-        <li class="covered" data-hits="12" data-linenumber="42">
-          <span class="hits">12</span>
+        <li class="covered" data-hits="21" data-linenumber="42">
+          <span class="hits">21</span>
           
           <code class="ruby">		data.map! { |record| Trend.exists?(record.trend_id) ? record : record.destroy }.compact</code>
         </li>
@@ -964,8 +964,8 @@
           <code class="ruby">		# OPTION I: current trends (get a uniq 10 result array of trends id&#39;s as most popular comes first)</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="45">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="35" data-linenumber="45">
+          <span class="hits">35</span>
           
           <code class="ruby">		trends_ids = data.sort_by { |record| record.time_of_trend }.map { |record| record.trend_id }.compact.pop(10)</code>
         </li>
@@ -982,8 +982,8 @@
           <code class="ruby">		# OPTION II: daily trends (get a uniq 10 result array of trend id&#39;s as most popular comes first)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="48">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="7" data-linenumber="48">
+          <span class="hits">7</span>
           
           <code class="ruby">		if daily</code>
         </li>
@@ -1036,14 +1036,14 @@
           <code class="ruby">		trends_ids.each_with_index.map { |id, index|</code>
         </li>
       
-        <li class="covered" data-hits="24" data-linenumber="57">
-          <span class="hits">24</span>
+        <li class="covered" data-hits="42" data-linenumber="57">
+          <span class="hits">42</span>
           
           <code class="ruby">			self.process_data(data.map { |record| record if record.trend_id == id }.compact, id, index + 1)</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="58">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="7" data-linenumber="58">
+          <span class="hits">7</span>
           
           <code class="ruby">		}.flatten</code>
         </li>
@@ -1132,8 +1132,8 @@
           <code class="ruby">	def set_trends_updated</code>
         </li>
       
-        <li class="covered" data-hits="21" data-linenumber="9">
-          <span class="hits">21</span>
+        <li class="covered" data-hits="31" data-linenumber="9">
+          <span class="hits">31</span>
           
           <code class="ruby">		self.trends_updated = Time.now</code>
         </li>

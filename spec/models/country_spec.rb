@@ -25,8 +25,33 @@ describe Country do
 	  			country.name.should == @countries[index][:name]
 	  			country.woeid.should == @countries[index][:woeid]
 	  		end
-	  	end  		
+	  	end
 
+      it "where the trends_updated field will be updated with the current time" do
+        Country.all.each do |country|
+          expect(country[:trends_updated]).not_to eq(nil) 
+        end
+      end
+
+      it "update the trends_updated field with the current time" do
+        country = Country.find_by_name(@countries[0][:name])
+        trends_updated = country[:trends_updated]
+        sleep(1)
+        country.set_trends_updated
+        country[:trends_updated].should_not eq(trends_updated)
+      end 		
   	end
+
+    describe "check name's uniqueness" do
+      before do
+        Country.create(@countries[0])
+      end
+
+      it "by adding another country with the same name" do
+        data = { name: "World1", woeid: 3 }
+        country = Country.create(data)
+        expect(country[:id]).to eq(nil) 
+      end
+    end
   end
 end

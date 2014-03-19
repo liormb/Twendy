@@ -30,7 +30,18 @@ describe Trend do
 	  	it "check if created_at and updated_at fields are being creating with a new entry" do
 	  		expect(Trend.new).to respond_to(:created_at, :updated_at)
 	  	end 		
-
   	end
+
+    describe "check name's uniqueness" do
+      before do
+        Trend.create(@trends[0])
+      end
+
+      it "by adding another trend with the same name" do
+        data = { name: "#Trend1", twitter_url: "http://www.myurl3.com" }
+        trend = Trend.create(data)
+        expect(trend[:id]).to eq(nil) 
+      end
+    end
   end
 end
