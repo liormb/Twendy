@@ -6,7 +6,9 @@ function drawGlobe(twitterCountries) {
 
 	var $arrows = $('.rotate-button');
 	var scaleFactor = 5;
-	var sens = 0.25;
+	var zoomOutSens = 0.20;
+	var zoomInSens = 0.06;
+	var sens = zoomOutSens;
 	var autoRotate = true;
 	var elipseTime = false;
 	var angle = -20;
@@ -125,6 +127,7 @@ function drawGlobe(twitterCountries) {
 				autoRotate = false;
 				tooltip.style('display', 'none');
 				$arrows.fadeOut(300);
+				sens = zoomInSens;
 				
 		    d3.transition()
 		      .duration(function(){
@@ -174,6 +177,7 @@ function drawGlobe(twitterCountries) {
 		    					start = Date.now();
 		    					autoRotate = true;
 		    					$arrows.fadeIn(300);
+		    					sens = zoomOutSens;
 					  		});
 					  }
 
