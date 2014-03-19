@@ -23,7 +23,7 @@ class CountriesTrend < ActiveRecord::Base
 			avarage_rank = (ranks.length == 1) ? median.floor : (ranks[0] < ranks[1]) ? median.floor : median.round
 			
 			# build the dataset that will match the heat map requirments
-			result << { :"name" => my_trend.name, :"url" => my_trend.twitter_url, :"interval" => interval, :"trend" => index, :"rank" => avarage_rank }
+			result << { :"name" => my_trend.name, :"twitter_url" => my_trend.twitter_url, :"interval" => interval, :"trend" => index, :"rank" => avarage_rank }
 
 			time -= cycle # set time 2 hours before
 			interval += 2 # next interval
