@@ -23,7 +23,6 @@ TrendsList.prototype = {
 			dataType: "json",
 			data: { name: country },
 			success: function(data) {
-				test = data;
 				$.each(data, function(index, trend) {
 					var new_trend = new Trend(trend.name, trend.twitter_url, trend.trend, trend.interval, trend.rank);
 					self.add(new_trend);
@@ -60,7 +59,7 @@ TrendsListView.prototype = {
 				break;
 			}
 		}
-		$('.heatmap-container').fadeIn(200);
+		$('.heatmap-container').fadeIn(300);
 	}
 }
 
@@ -106,8 +105,7 @@ CountriesList.prototype = {
 
 function CountriesListView(){
 	this.collection = new CountriesList;
-	//this.trends_list = new TrendsList;
-
+	
 	// bypassing lexical scope to seperate concerns
 	var self = this;
 	var success = function() {
@@ -122,6 +120,13 @@ CountriesListView.prototype = {
 	}
 }
 
+function eventHandler() {
+	$('#close-heatmap-button').on('click', function(event){
+		$('.heatmap-container').fadeOut(300);
+	});
+}
+
 $(function() {
+	eventHandler();
   new CountriesListView;
 });

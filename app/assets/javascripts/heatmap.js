@@ -94,13 +94,3 @@ function heatMap(error, data) {
       tooltip.style('display', 'none');
     });
 }
-
-function eventHandler() {
-	$('#close-heatmap-button').on('click', function(event){
-		$('.heatmap-container').fadeOut(300);
-	});
-}
-
-$(function() {
-	eventHandler();
-});

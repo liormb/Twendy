@@ -5,7 +5,7 @@ class CountriesTrend < ActiveRecord::Base
 	def self.process_data(data, trend_id, index)
 		result = []
 		interval = 2 # check trend every 2 hours
-		time = Time.now #self.all.sort_by(&:time_of_trend)[-1][:time_of_trend]
+		time = Time.now
 		cycle = 60 * 60 * 2 # two hours cycle
 		my_trend = Trend.find(trend_id)
 
@@ -25,19 +25,18 @@ class CountriesTrend < ActiveRecord::Base
 			# build the dataset that will match the heat map requirments
 			result << { :"name" => my_trend.name, :"twitter_url" => my_trend.twitter_url, :"interval" => interval, :"trend" => index, :"rank" => avarage_rank }
 
-			time -= cycle # set time 2 hours before
+			time -= cycle # set time as 2 hours before
 			interval += 2 # next interval
 		end
 		result
 	end
 
 	def self.heat_map(country, daily=false)
-		time = Time.now #self.all.sort_by(&:time_of_trend)[-1][:time_of_trend]
 		country_id = Country.find_by_name(country).nil? ? false : Country.find_by_name(country).id
 		return false if !country_id  # return false if no country has been found 
 
 		# fetch country trends from the last 24 hours ordered by creation
-		data = self.where("country_id = ? AND time_of_trend >= ?", country_id, time - 86400).order('time_of_trend DESC')
+		data = self.where("country_id = ? AND time_of_trend >= ?", country_id, Time.now - 86400).order('time_of_trend DESC')
 		
 		# verifying that trends exists (if not, destroy the joiner record)
 		data.map! { |record| Trend.exists?(record.trend_id) ? record : record.destroy }.compact

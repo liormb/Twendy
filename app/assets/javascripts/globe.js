@@ -127,7 +127,9 @@ function drawGlobe(twitterCountries) {
 				$arrows.fadeOut(300);
 				
 		    d3.transition()
-		      .duration(300)
+		      .duration(function(){
+		      	return (d && centered !== d) ? 600 : 0;
+		      })
 		      .tween("rotate", function() {
 		        var p = d3.geo.centroid(d);
 		        var r = d3.interpolate(projection.rotate(), [-p[0], -p[1]]);
@@ -154,9 +156,13 @@ function drawGlobe(twitterCountries) {
 					    centered = null;
 					    showHeatMap = false;
 
+					    if ($('.heatmap-container').css('display') != "none")
+					    	$('.heatmap-container').fadeOut(300);
+
 					    d3.transition()
 					      .duration(800)
 					      .tween("rotate", function() {
+					      	console.log("2st duration");
 					        r = d3.interpolate(projection.rotate(), [stop, angle]);
 					        return function(t) {
 					          projection.rotate(r(t));
