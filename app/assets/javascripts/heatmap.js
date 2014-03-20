@@ -49,9 +49,6 @@ function heatMap(error, data) {
 
   // filling the rectangles with colors upon their rank
   heatMap.style("fill", function(d) { return colorScale(d.rank); });
-
-  // adding title to every rectangle
-  // heatMap.append("title").text(function(d) { return d.rank; });
    
   // building the color legend   
   var legend = svg.selectAll(".legend")
@@ -61,7 +58,7 @@ function heatMap(error, data) {
 
   legend.append("rect")
     .attr("x", function(d, i) { return (gridSize + 4) * i + 49; })
-    .attr("y", height - 21)
+    .attr("y", height - 22)
     .attr("width", gridSize + 4)
     .attr("height", gridSize / 3)
     .style("fill", function(d, i) { return (i+1 < colors.length) ? colors[i+1] : 'rgba(0,0,0,0)'; });

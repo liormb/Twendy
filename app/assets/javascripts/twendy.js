@@ -15,13 +15,13 @@ TrendsList.prototype = {
 	add: function(trend) {
 		this.trends.push(trend);
 	},
-	fetch: function(country) {
+	fetch: function(country, heatMapState) {
 		var self = this;
 		$.ajax({
 			method: "get",
 			url: "/countries/id",
 			dataType: "json",
-			data: { name: country },
+			data: { name: country, state: heatMapState },
 			success: function(data) {
 				$.each(data, function(index, trend) {
 					var new_trend = new Trend(trend.name, trend.twitter_url, trend.trend, trend.interval, trend.rank);
@@ -129,11 +129,15 @@ function eventHandler() {
 	});
 }
 
+var currentCountry;
+var heatMapState = "now";
 var testit = 0;
 function test() {
 	testit++;
 	if (testit == 2) {
-		console.log("Clicked");
+		heatMapState = (heatMapState == "now") ? "daily" : "now";
+		var trends_list = new TrendsList;
+		trends_list.fetch(currentCountry, heatMapState);
 		testit = 0;
 	}	
 }

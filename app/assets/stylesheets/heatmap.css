@@ -112,7 +112,7 @@ text.intervalLabel {
 }
 .legend-bar {
 	position: absolute;
-	bottom: 26px;
+	bottom: 27px;
 	left: 40px;
 	background: rgba(120,120,120,.8);
 	width: 596px;
@@ -128,7 +128,7 @@ text.intervalLabel {
 	margin-left: 8px;
 }
 .legend-bar span:last-child {
-	margin-left: 514px;
+	margin-left: 512px;
 }
 .timeline-slider {
   overflow: hidden;

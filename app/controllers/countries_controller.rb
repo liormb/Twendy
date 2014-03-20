@@ -11,7 +11,7 @@ class CountriesController < ApplicationController
 
 	def show
 		country = Country.find_by_name(params[:name])
-		@data = CountriesTrend.heat_map(country.name)
+		@data = CountriesTrend.heat_map(country.name, params[:state])
 
 		respond_to do |format|
 			format.html

@@ -125,6 +125,7 @@ function drawGlobe(twitterCountries) {
 				this.classList.add('selected-country');
 				lastCountry = this;
 
+				currentCountry = d.name;
 				sens = zoomInSens;
 				autoRotate = false;
 				tooltip.style('display','none');
@@ -189,7 +190,7 @@ function drawGlobe(twitterCountries) {
 					    .each("end", function(){
 					    	if (showHeatMap && twitterCountries.indexOf(d.name) > -1) {
 					    		var trends_list = new TrendsList;
-									trends_list.fetch(d.name);
+									trends_list.fetch(d.name, heatMapState);
 					    	}
 					    });
 				  });
