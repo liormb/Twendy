@@ -22,7 +22,7 @@ countries[0] = "World"
 
 # creating the countries table with all names and woeid (Where On Earth IDentifier)
 countries.each do |country|
-	id  = "ovokzTzV34HwDKdE9hlTp5r9hVTX5pmRAny0l81Jkx2bWD7_jWECaawJPO_0"
+	id = ENV['YAHOO_ID']
 	url = "http://where.yahooapis.com/v1/places.q(#{country.gsub(" ","%20")})?appid=#{id}"
 	response = HTTParty.get(url)
 	woeid = response['places']['place']['woeid']

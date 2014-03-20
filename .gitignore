@@ -17,3 +17,6 @@
 
 # Ignore the twitter credentials file
 /config/initializers/twitter_credentials.rb
+
+# Ignore the Yahoo credentials file
+/config/initializers/yahoo_credentials.rb

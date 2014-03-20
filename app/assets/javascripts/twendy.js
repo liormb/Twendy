@@ -125,22 +125,20 @@ function eventHandler() {
 		$('.heatmap-container').fadeOut(300);
 	});
 	$('label.timeline-slider').on('click', function(event){
-		test();
+		eventTriger++;
+		if (eventTriger == 2) {
+			heatMapState = (heatMapState == "now") ? "daily" : "now";
+			var trends_list = new TrendsList;
+			trends_list.fetch(currentCountry, heatMapState);
+			eventTriger = 0;
+		}
 	});
 }
 
+// global variables
 var currentCountry;
 var heatMapState = "now";
-var testit = 0;
-function test() {
-	testit++;
-	if (testit == 2) {
-		heatMapState = (heatMapState == "now") ? "daily" : "now";
-		var trends_list = new TrendsList;
-		trends_list.fetch(currentCountry, heatMapState);
-		testit = 0;
-	}	
-}
+var eventTriger = 0;
 
 $(function() {
 	eventHandler();
