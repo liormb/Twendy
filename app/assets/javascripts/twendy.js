@@ -124,6 +124,18 @@ function eventHandler() {
 	$('#close-heatmap-button').on('click', function(event){
 		$('.heatmap-container').fadeOut(300);
 	});
+	$('label.timeline-slider').on('click', function(event){
+		test();
+	});
+}
+
+var testit = 0;
+function test() {
+	testit++;
+	if (testit == 2) {
+		console.log("Clicked");
+		testit = 0;
+	}	
 }
 
 $(function() {

@@ -2,7 +2,7 @@
 function heatMap(error, data) { 
   var gridSize = 46;
 	var rectMargin = 4;
-  var margin = { top: 100, right: 0, bottom: 0, left: 0 };
+  var margin = { top: 86, right: 0, bottom: 0, left: 0 };
   var width  = (gridSize + rectMargin) * 12 - rectMargin;
   var height = (gridSize + rectMargin) * 10 - rectMargin + 30;
   //var colors = ['rgba(120,120,120,.7)','rgb(136,0,66)','rgb(186,62,77)','rgb(217,108,64)','rgb(235,173,95)','rgb(247,224,137)','rgb(247,251,169)','rgb(234,246,151)','rgb(185,221,163)','rgb(134,193,165)','rgb(84,134,188)'];
@@ -29,7 +29,7 @@ function heatMap(error, data) {
       .enter().append("text")
         .text(function(d) { return d; })
         .attr("x", function(d, i) { return i * (gridSize + rectMargin); })
-        .attr("y", height - 6)
+        .attr("y", 0) //height - 6
         .style("text-anchor", "middle")
         .style("font-size", "11px")
         .attr('fill', 'rgb(220,220,220)')
@@ -60,9 +60,9 @@ function heatMap(error, data) {
       .attr("class", "legend");
 
   legend.append("rect")
-    .attr("x", function(d, i) { return (gridSize / 3) * i + 45; })
-    .attr("y", -26)
-    .attr("width", gridSize / 3)
+    .attr("x", function(d, i) { return (gridSize + 4) * i + 49; })
+    .attr("y", height - 21)
+    .attr("width", gridSize + 4)
     .attr("height", gridSize / 3)
     .style("fill", function(d, i) { return (i+1 < colors.length) ? colors[i+1] : 'rgba(0,0,0,0)'; });
 
