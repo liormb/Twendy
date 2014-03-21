@@ -1,9 +1,8 @@
 
 function drawGlobe(twitterCountries) {
-	
+
 	var width = screen.width;
 	var height = screen.height - 140;
-
 	var $arrows = $('button.rotate-button');
 	var scaleFactor = 5;
 	var zoomOutSens = 0.20;
@@ -88,17 +87,12 @@ function drawGlobe(twitterCountries) {
 
 		// change globe rotating direction
 		$arrows.on('click', function(event){
-			if (elipseTime) {	
-				start = Date.now();
-				elipseTime = false;
-			}
+			if (elipseTime) start = Date.now();
 			stop = speed * (Date.now() - start) + stop;
 			start = Date.now();
-
 			speed = (event.target.id == 'rotate-left') ? -1e-2 : 1e-2;
-			if ((angle <= -90 && angle > -270) || (angle >= 90 && angle < 270)) 
-				speed = (speed == 1e-2) ? -1e-2 : 1e-2;
-
+			//speed = (speed == 1e-2) ? -1e-2 : 1e-2;
+			elipseTime = false;
 			autoRotate = true;
 		});
 
@@ -212,7 +206,7 @@ function drawGlobe(twitterCountries) {
 	      	(angle > 0) ? angle -= 360 : angle += 360; 
 	      }
 	      stop = d3.event.x * sens;
-	      elipseTime = true;
+	      if (sens == zoomOutSens) elipseTime = true;
 	    }));
 
 	} // end of ready function
