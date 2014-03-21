@@ -121,7 +121,11 @@ CountriesListView.prototype = {
 }
 
 function eventHandler() {
-	$('#close-heatmap-button').on('click', function(event){
+	$('button.slide-right-drawer').on('click', function(event){
+		var right = ($('.right-drawer-container').css('right') >= '0px') ? '-265px' : '0';
+		$('.right-drawer-container').animate({right: right}, 500);
+	});
+	$('button.close-heatmap').on('click', function(event){
 		$('.heatmap-container').fadeOut(300);
 	});
 	$('label.timeline-slider').on('click', function(event){
