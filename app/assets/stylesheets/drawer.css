@@ -1,0 +1,48 @@
+/* ========================= */
+/*     Drawer CSS roles      */
+/* ========================= */
+
+.right-drawer-container {
+	position: absolute;
+	top: 10px;
+	right: -265px;
+	background: rgba(40,40,40,.7);
+	width: 265px;
+	height: 760px;
+	border-left: 5px solid white;
+	z-index: 9999;
+}
+button.slide-right-drawer {
+	position: absolute;
+	top: -webkit-calc(50% - 46px);
+	right: 226px;
+	padding: 8px 12px;
+	border: 2px solid white;
+	border-bottom: none;
+	border-radius: 4px 4px 0 0;
+	background: rgb(249,118,68);
+	color: white;
+	font-size: 16px;
+	line-height: 16px;
+	-webkit-transform:rotate(-90deg);
+}
+button.slide-right-drawer:focus {
+	outline: none;
+}
+.side-drawer h1 {
+	background: rgb(249,118,68);
+	color: white;
+	text-align: center;
+	font-size: 24px;
+	line-height: 24px;
+	margin: 22px 0;
+	padding: 8px 0;
+}
+.side-drawer p {
+	color: white;
+	padding: 0px 20px;
+	font-size: 16px;
+}
+.side-drawer span {
+	color: rgb(249,118,68);
+}
