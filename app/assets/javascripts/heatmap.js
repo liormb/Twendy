@@ -1,8 +1,8 @@
 
 function heatMap(error, data) { 
-  var gridSize = 46;
+  var gridSize = 42;
 	var rectMargin = 4;
-  var margin = { top: 86, right: 0, bottom: 0, left: 0 };
+  var margin = { top: 95, right: 0, bottom: 0, left: 0 };
   var width  = (gridSize + rectMargin) * 12 - rectMargin;
   var height = (gridSize + rectMargin) * 10 - rectMargin + 30;
   //var colors = ['rgba(120,120,120,.7)','rgb(136,0,66)','rgb(186,62,77)','rgb(217,108,64)','rgb(235,173,95)','rgb(247,224,137)','rgb(247,251,169)','rgb(234,246,151)','rgb(185,221,163)','rgb(134,193,165)','rgb(84,134,188)'];
@@ -57,7 +57,7 @@ function heatMap(error, data) {
       .attr("class", "legend");
 
   legend.append("rect")
-    .attr("x", function(d, i) { return (gridSize + 4) * i + 49; })
+    .attr("x", function(d, i) { return (gridSize + 3) * i + 50; })
     .attr("y", height - 22)
     .attr("width", gridSize + 4)
     .attr("height", gridSize / 3)

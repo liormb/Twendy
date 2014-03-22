@@ -11,7 +11,7 @@
 	width: 265px;
 	height: 760px;
 	border-left: 2px solid white;
-	box-shadow: -10px 0px 5px -2px rgba(200,200,200,.3);
+	box-shadow: -6px 0px 5px -2px rgba(40,40,40,.3);
 	z-index: 9999;
 }
 .left-drawer-container {
@@ -19,7 +19,7 @@
 	left: -265px;
 	border-left: none;
 	border-right: 2px solid white;
-	box-shadow: 10px 0px 5px -2px rgba(200,200,200,.3);
+	box-shadow: 6px 0px 5px -2px rgba(40,40,40,.3);
 }
 button.slide-right-drawer,
 button.slide-left-drawer {

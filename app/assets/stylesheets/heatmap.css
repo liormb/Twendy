@@ -6,10 +6,10 @@
 	display: none;
 	overflow: hidden;
 	position: fixed;
-  top: 9%;
+  top: 11%;
   left: 14%;
   width: 72%;
-	height: 82%;
+	height: 78%;
 	border-radius: 8px;
 	border: 1px solid rgb(220,220,220);
 	background: rgba(40,40,40,.7);
@@ -32,7 +32,7 @@ button.close-heatmap:hover {
 }
 .heatmap-container h1 {
 	position: absolute;
-	top: 16px;
+	top: 20px;
 	left: 30%;
 	width: 40%;
 	margin: 0;
@@ -45,7 +45,7 @@ button.close-heatmap:hover {
 	position: absolute;
 	bottom: 52px;
 	right: 0;
-	width: 400px;
+	width: 440px;
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -55,7 +55,7 @@ button.close-heatmap:hover {
 	margin: 0;
 	padding-left: 20px;
 	font-size: 25px;
-	line-height: 50px;
+	line-height: 46px;
 }
 .trends-list a {
 	transition: all 0.4s;
@@ -113,7 +113,7 @@ text.intervalLabel {
 	bottom: 27px;
 	left: 40px;
 	background: rgba(120,120,120,.8);
-	width: 596px;
+	width: 548px;
 	height: 25px;
 	border: 1px solid rgb(200,200,200);
 	border-radius: 0 0 4px 4px;
@@ -126,7 +126,7 @@ text.intervalLabel {
 	margin-left: 8px;
 }
 .legend-bar span:last-child {
-	margin-left: 512px;
+	margin-left: 464px;
 }
 .timeline-slider {
   overflow: hidden;
