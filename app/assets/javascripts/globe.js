@@ -1,22 +1,25 @@
 
 function drawGlobe(twitterCountries) {
 
+
 	var width = screen.width;
 	var height = screen.height - 140;
-	var $arrows = $('button.rotate-button');
 	var scaleFactor = 5;
-	var zoomOutSens = 0.20;
+	var zoomOutSens = 0.2;
 	var zoomInSens = 0.06;
 	var sens = zoomOutSens;
 	var autoRotate = true;
-	var elipseTime = false;
 	var angle = -20;
 	var speed = -1e-2;
  	var start = Date.now();
  	var stop = 0;
+ 	var restartTime;
   var centered;
   var lastCountry;
 	var showHeatMap;
+	var $arrows = $('button.rotate-button');
+	var $topArrow = $('.top-helper-arrow');
+	var $bottomArrow = $('.bottom-helper-arrow');
 
 	var svg = d3.select(".globe-container")
 		.append('svg')
@@ -87,14 +90,37 @@ function drawGlobe(twitterCountries) {
 
 		// change globe rotating direction
 		$arrows.on('click', function(event){
-			if (elipseTime) start = Date.now();
+			if (restartTime) start = Date.now();
 			stop = speed * (Date.now() - start) + stop;
 			start = Date.now();
-			speed = (event.target.id == 'rotate-left') ? -1e-2 : 1e-2;
-			//speed = (speed == 1e-2) ? -1e-2 : 1e-2;
-			elipseTime = false;
+			speed = (event.target.id == 'rotate-left') ? 1e-2 : -1e-2;
+			if (angle <= -180 && angle > -360) speed = (event.target.id == 'rotate-left') ? -1e-2 : 1e-2;
 			autoRotate = true;
-		});
+			restartTime = false;
+		}).hover(
+			function(){
+				$topArrow.removeClass().addClass('top-helper-arrow');
+				$bottomArrow.removeClass().addClass('bottom-helper-arrow');
+
+				if (event.target.id == 'rotate-left') {
+					$topArrow.addClass('top-arrow-left');
+					$bottomArrow.addClass('bottom-arrow-right');
+				} else {
+					$topArrow.addClass('top-arrow-right');
+					$bottomArrow.addClass('bottom-arrow-left');
+				}
+
+				$('.top-helper-arrow, .bottom-helper-arrow').stop(true).animate({opacity: 1}, 1500, function(){
+					$(this).stop(true).animate({opacity: 0}, 500);
+				});
+			},
+			function(){
+				$('.top-helper-arrow, .bottom-helper-arrow').stop(true).animate({opacity: 0}, 500, function(){
+					$topArrow.removeClass().addClass('top-helper-arrow');
+					$bottomArrow.removeClass().addClass('bottom-helper-arrow');
+				});
+			}
+		);
 
 		// events processing
 		globe
@@ -169,6 +195,7 @@ function drawGlobe(twitterCountries) {
 					      })
 					    	.transition()
 					  		.each("end", function(){
+					  			restartTime = false;
 					  			sens = zoomOutSens;
 		    					start = Date.now();
 		    					autoRotate = true;
@@ -199,14 +226,14 @@ function drawGlobe(twitterCountries) {
 	    .on("drag", function() {
 	    	autoRotate = false;
 	      var rotate = projection.rotate();
-	      projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]);
+	      projection.rotate([d3.event.x * sens, -d3.event.y * sens, rotate[2]]); 
 	      svg.selectAll('path').attr('d', path);
 	      angle = -d3.event.y * sens;
 	      while (angle >= 360 || angle <= -360){ 
 	      	(angle > 0) ? angle -= 360 : angle += 360; 
 	      }
 	      stop = d3.event.x * sens;
-	      if (sens == zoomOutSens) elipseTime = true;
+	      restartTime = true;
 	    }));
 
 	} // end of ready function
