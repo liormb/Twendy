@@ -79,7 +79,8 @@ describe CountriesTrend do
 			end
 
 			it "given an existing country name sould return an array" do
-				CountriesTrend.heat_map(@country.name, true).instance_of?(Array).should == true
+				state = 'daily'
+				CountriesTrend.heat_map(@country.name, state).instance_of?(Array).should == true
 			end
 		end
 
