@@ -4,6 +4,8 @@
 
 ## Twendy is a visual application that presents global Twitter trends in the past 24 hours.
 
+![alt text](https://github.com/liormb/app/assets/images/twendy-switzerland.png "Logo")
+
 ## Background
 
 Twitter users send more than 95 million Tweets a day, on just about every topic imaginable. This is quite a lot to handle! In order to better understand what are the most popular topics people are tweeting about, Twitter decided to track the volume of terms mentioned by its users on an ongoing basis and turn them into topics. When the volume of tweets about a given topic dramatically increases at a given moment, a Trend is born!
