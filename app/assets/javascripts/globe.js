@@ -9,7 +9,7 @@ function drawGlobe(twitterCountries) {
 	var zoomInSens = 0.06;
 	var sens = zoomOutSens;
 	var autoRotate = true;
-	var angle = -20;
+	var angle = -40;
 	var speed = -1e-2;
  	var start = Date.now();
  	var stop = 0;
