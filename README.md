@@ -1,4 +1,5 @@
 # Twendy
+By [Lior Elrom](http://liormb.com/).
 
 ####<http://twendy-app.herokuapp.com>
 
@@ -35,3 +36,4 @@ When you want to return to the whole globe country, just click the last country 
 ##Test Driven Development
 
 I am a big fan of testing and strongly believe that every application should contain testing units in order to improve existing code and maintain a working application. As a result, Twendy is well tested on the server side with 100% covarage.
+![TDD](/app/assets/images/coverage.png "TDD")
