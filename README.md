@@ -4,7 +4,7 @@
 
 ## Twendy is a visual application that presents global Twitter trends in the past 24 hours.
 
-![alt text](https://github.com/liormb/app/assets/images/twendy-switzerland.png "Logo")
+![alt text](https://github.com/liormb/twendy/blob/master/app/assets/images/twendy-switzerland.png "Twendy")
 
 ## Background
 
