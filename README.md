@@ -1,5 +1,6 @@
 # Twendy
 By [Lior Elrom](http://liormb.com/).
+- - -
 
 ####<http://twendy-app.herokuapp.com>
 
@@ -40,36 +41,46 @@ Twendy is combind from 3 models:
 * [Trend](https://github.com/liormb/twendy/blob/master/app/models/trend.rb): holding each and every uniq trend information
 * [CountriesTrend](https://github.com/liormb/twendy/blob/master/app/models/countries_trend.rb): using as a join table by assigning each trend to its country (or countries)
 
-All the code throughout the application is well commented for readability and future debugging
+All the code, throughout the application, is well commented for readability and future debugging.
 ```ruby
 def self.process_data(data, trend_id, index)
-		result = []
-		interval = 2 # check trend every 2 hours
-		time = Time.now
-		cycle = 60 * 60 * 2 # two hours cycle
-		my_trend = Trend.find(trend_id)
+	result = []
+	interval = 2 # check trend every 2 hours
+	time = Time.now
+	cycle = 60 * 60 * 2 # two hours cycle
+	my_trend = Trend.find(trend_id)
 
-		until interval > 24 do
-			# get all trends for that time cycle
-			trends = data.map {|record| record if record[:time_of_trend] <= time && record[:time_of_trend] > (time - cycle) }.compact
+	until interval > 24 do
+		# get all trends for that time cycle
+		trends = data.map {|record| record if record[:time_of_trend] <= time && record[:time_of_trend] > (time - cycle) }.compact
 
-			# get all ranks for those trends
-			ranks = trends.map {|trend| trend[:rank] }.compact
-			ranks = [0,0] if ranks.empty?
+		# get all ranks for those trends
+		ranks = trends.map {|trend| trend[:rank] }.compact
+		ranks = [0,0] if ranks.empty?
 
-			# calculate an avarage rank and round or floor the result
-			# floor when last rank is better and round vise versa
-			median = ranks.inject { |sum, rank| sum + rank }.to_f / ranks.length
-			avarage_rank = (ranks.length == 1) ? median.floor : (ranks[0] < ranks[1]) ? median.floor : median.round
+		# calculate an avarage rank and round or floor the result
+		# floor when last rank is better and round vise versa
+		median = ranks.inject { |sum, rank| sum + rank }.to_f / ranks.length
+		avarage_rank = (ranks.length == 1) ? median.floor : (ranks[0] < ranks[1]) ? median.floor : median.round
 
-			# build the dataset that will match the heat map requirments
-			result << { :"name" => my_trend.name, :"twitter_url" => my_trend.twitter_url, :"interval" => interval, :"trend" => index, :"rank" => avarage_rank }
+		# build the dataset that will match the heat map requirments
+		result << { :"name" => my_trend.name, :"twitter_url" => my_trend.twitter_url, :"interval" => interval, :"trend" => index, :"rank" => avarage_rank }
 
-			time -= cycle # set time as 2 hours before
-			interval += 2 # next interval
-		end
-		result
+		time -= cycle # set time as 2 hours before
+		interval += 2 # next interval
 	end
+	result
+end
+```
+
+And also scalable and devided to different templates
+
+```ruby
+<%= render "layouts/templates/globe" %>
+
+<%= render "layouts/templates/drawer" %>
+
+<%= render "layouts/templates/heatmap" %>
 ```
 
 ##Test Driven Development
