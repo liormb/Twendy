@@ -28,9 +28,10 @@ gem 'simplecov', '~> 0.7.1'
 # gem 'simplecov', :require => false, :group => :test
 gem 'jasmine'
 
-# ----------- Heroku warnings -----------
+# --------------- Heroku  ---------------
 
 gem 'rails_12factor'
+gem 'newrelic_rpm'
 
 # =======================================
 
