@@ -9,14 +9,13 @@
   margin: 0 auto;
   background: white;
   color: #333;
+  border-top: 10px solid white;
 }
 .globe-container svg {
   position: absolute;
   top: 0;
   left: 0;
   fill: #fff;
-  border-top: 10px solid white;
-  border-bottom: 10px solid white;
 }
 .sphere {
   fill: rgb(156,191,217);
@@ -58,9 +57,7 @@
   border: solid #ccc 1px;
   font-family: sans-serif;
   font-size: 12px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;  
+  border-radius: 5px; 
   background: #fff;
   color: #666;
   pointer-events: none;
@@ -68,7 +65,6 @@
 button.rotate-button {
   position: absolute;
   top: 320px;
-  left: 320px;
   width: 48px;
   height: 80px;
   text-indent: 200%;
@@ -76,13 +72,15 @@ button.rotate-button {
   border: none;
   z-index: 99;
 }
+button#rotate-left {
+  left: 22%;
+}
+button#rotate-right {
+  right: 22%;
+}
 button.rotate-button:hover {
   top: 322px;
   cursor: pointer;
-}
-button#rotate-right {
-  left: auto;
-  right: 320px;
 }
 button.close-heatmap {
   overflow: hidden;
@@ -101,23 +99,26 @@ button.close-heatmap {
   opacity: 0;
   position: absolute;
   left: -webkit-calc(50% - 60px);
+  left: -moz-calc(50% - 60px);
+  left: -o-calc(50% - 60px);
+  left: calc(50% - 60px);
   width: 120px;
   height: 25px;
 }
 .top-arrow-left,
 .bottom-arrow-left {
+  -webkit-transform: scaleX(-1);
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
   filter: FlipH;
   -ms-filter: "FlipH";
 }
 .top-arrow-left,
 .top-arrow-right {
-  top: 50px;
+  top: 46px;
 }
 .bottom-arrow-left,
 .bottom-arrow-right {
-  top: 686px;
+  top: 690px;
 }

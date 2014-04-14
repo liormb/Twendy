@@ -9,8 +9,9 @@
 	right: -265px;
 	background: rgba(40,40,40,.7);
 	width: 265px;
-	height: 760px;
+	height: 768px;
 	border-left: 2px solid white;
+	border-bottom: 2px solid white; 
 	box-shadow: -6px 0px 5px -2px rgba(40,40,40,.3);
 	z-index: 9999;
 }
@@ -25,6 +26,9 @@ button.slide-right-drawer,
 button.slide-left-drawer {
 	position: absolute;
 	top: -webkit-calc(50% - 46px);
+	top: -moz-calc(50% - 46px);
+	top: -o-calc(50% - 46px);
+	top: calc(50% - 46px);
 	right: 226px;
 	padding: 8px 12px;
 	border: 2px solid white;
@@ -35,11 +39,17 @@ button.slide-left-drawer {
 	font-size: 16px;
 	line-height: 16px;
 	-webkit-transform:rotate(-90deg);
+	-moz-transform:rotate(-90deg);
+	-o-transform:rotate(-90deg);
+	transform:rotate(-90deg);
 }
 button.slide-left-drawer {
 	right: auto;
 	left: 226px;
 	-webkit-transform:rotate(90deg);
+	-moz-transform:rotate(90deg);
+	-o-transform:rotate(90deg);
+	transform:rotate(90deg);
 }
 button.slide-right-drawer:focus,
 button.slide-left-drawer:focus {

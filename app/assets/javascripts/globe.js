@@ -3,7 +3,7 @@ function drawGlobe(twitterCountries) {
 
 
 	var width = screen.width;
-	var height = screen.height - 140;
+	var height = screen.height - 130;
 	var scaleFactor = 5;
 	var zoomOutSens = 0.2;
 	var zoomInSens = 0.06;

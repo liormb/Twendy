@@ -7,7 +7,13 @@
 // =============================
 
 html {
-	background: rgb(192,222,237) url(image-path('twitter-bg.png')) center center no-repeat;
+	background: rgb(255,255,255) url(image-path('pattern.jpg')) repeat;
+}
+.clouds {
+	background: url(image-path('outer-clouds.png')) center center no-repeat;
+}
+.clouds span {
+	background: url(image-path('inner-clouds.png')) center center no-repeat;
 }
 #logo {
 	background: url(image-path('logo.png')) 0 0 no-repeat;
