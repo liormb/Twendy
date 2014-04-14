@@ -6,7 +6,7 @@ By [Lior Elrom](http://liormb.com/).
 
 ## Twendy is a visual application that presents global Twitter trends in the past 24 hours.
 
-![Twendy](/app/assets/images/twendy-switzerland.png "Twendy")
+![Twendy](/app/assets/images/twendy.png "Twendy")
 
 ## Background
 
@@ -22,6 +22,8 @@ Drag the globe to your desired country and click it! A pop-up window will come u
 
 When you want to return to the whole globe country, just click the last country you clicked before (as it marked with an orange color).
 
+![Twendy](/app/assets/images/twendy-switzerland.png "Twendy")
+###
 ## Technologies
 
 * Ruby on Rails 4
