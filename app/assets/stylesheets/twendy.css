@@ -2,6 +2,9 @@
 /*   Application CSS roles   */
 /* ========================= */
 
+html {
+	overflow: hidden !important;
+}
 #page {
 	position: relative;
 	top: 0px;
