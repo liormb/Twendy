@@ -57,6 +57,7 @@ button.close-heatmap:hover {
 	padding-left: 20px;
 	font-size: 25px;
 	line-height: 46px;
+	white-space: nowrap;
 }
 .trends-list a {
 	-webkit-transition: all 0.4s;
