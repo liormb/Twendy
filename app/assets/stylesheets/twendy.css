@@ -46,3 +46,10 @@ html {
 	background-size: cover;
 	z-index: 9999;
 }
+
+@media screen and (max-width: 1280px) {
+	#logo { left: 20px; }
+}
+@media screen and (max-width: 700px) {
+	#logo { left: 28%; }
+}

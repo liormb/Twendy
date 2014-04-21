@@ -47,6 +47,7 @@ button.close-heatmap:hover {
 	bottom: 52px;
 	right: 0;
 	width: 440px;
+	width: -webkit-calc(100% - 585px);
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -182,4 +183,8 @@ text.intervalLabel {
 #slider-daily {
   background: #0084ff;
   left: 0;
+}
+
+@media screen and (max-width: 1280px) {
+	.heatmap-container { left: 8%; width: 84%; }
 }

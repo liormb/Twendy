@@ -122,3 +122,16 @@ button.close-heatmap {
 .bottom-arrow-right {
   top: 700px;
 }
+
+@media screen and (max-width: 1280px) {
+  button#rotate-left { left: 20%; }
+  button#rotate-right { right: 20%; }
+}
+@media screen and (max-width: 1080px) {
+  button#rotate-left { left: 16%; }
+  button#rotate-right { right: 16%; }
+}
+@media screen and (max-width: 880px) {
+  button#rotate-left { left: 8%; }
+  button#rotate-right { right: 8%; }
+}

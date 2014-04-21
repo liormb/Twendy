@@ -1,9 +1,8 @@
 
 function drawGlobe(twitterCountries) {
 
-
-	var width = screen.width;
-	var height = screen.height - 130;
+	var width = window.innerWidth;
+	var height = window.innerHeight - 50;
 	var scaleFactor = 5;
 	var zoomOutSens = 0.2;
 	var zoomInSens = 0.06;
@@ -20,6 +19,14 @@ function drawGlobe(twitterCountries) {
 	var $arrows = $('button.rotate-button');
 	var $topArrow = $('.top-helper-arrow');
 	var $bottomArrow = $('.bottom-helper-arrow');
+
+	switch(true) {
+		case (width  > 1280                ): scaleFactor = 5.0; break;
+		case (width <= 1280 && width > 1080): scaleFactor = 4.5; break;
+		case (width <= 1080 && width >  880): scaleFactor = 4.0; break;
+		case (width <=  880 && width >  480): scaleFactor = 3.0; break;
+		case (width <=  480 && width >    0): scaleFactor = 3.0; break;
+	}
 
 	var svg = d3.select(".globe-container")
 		.append('svg')
