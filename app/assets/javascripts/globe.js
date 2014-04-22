@@ -2,7 +2,8 @@
 function drawGlobe(twitterCountries) {
 
 	var width = window.innerWidth;
-	var height = window.innerHeight - 50;
+	var height = window.innerHeight;
+	var globePaddingTop = 30;
 	var scaleFactor = 5;
 	var zoomOutSens = 0.2;
 	var zoomInSens = 0.06;
@@ -35,7 +36,7 @@ function drawGlobe(twitterCountries) {
 
 	projection = d3.geo.orthographic()
 		.scale(width / scaleFactor)
-		.translate([width / 2, height / 2])
+		.translate([width / 2, height / 2 - globePaddingTop])
 		.rotate([0, angle * 2])
 		.clipAngle(95);
 
