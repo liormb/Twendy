@@ -1,8 +1,9 @@
 # Twendy
 By [Lior Elrom](http://liormb.com/).
-- - -
 
 ####<http://twendy-app.herokuapp.com>
+
+- - -
 
 ## Twendy is a visual application that presents global Twitter trends in the past 24 hours.
 
