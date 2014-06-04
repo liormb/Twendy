@@ -5,7 +5,7 @@ By [Lior Elrom](http://liormb.com/).
 
 - - -
 
-## Twendy is a visual application that presents global Twitter trends in the past 24 hours.
+### Twendy is a visual application that presents global Twitter trends in the past 24 hours.
 
 ![Twendy](/app/assets/images/twendy.png "Twendy")
 
