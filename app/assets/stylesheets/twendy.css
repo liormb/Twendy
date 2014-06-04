@@ -5,34 +5,15 @@
 html {
 	overflow: hidden !important;
 }
+body {
+	background: transparent !important;
+}
 #page {
 	position: relative;
-	top: 0px;
+	top: 0;
 	left: 0;
-	width: 100%;
-	height: 100%;
 	margin: 0;
 	padding: 0;
-}
-.clouds {
-	position: absolute;
-	top: 620px;
-	left: 0;
-	width: 100%;
-	height: 160px;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-}
-.clouds span {
-	display: block;
-	width: 100%;
-	height: 160px;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
 }
 #logo {
 	position: absolute;

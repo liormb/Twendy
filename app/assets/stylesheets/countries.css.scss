@@ -7,13 +7,11 @@
 // =============================
 
 html {
-	background: rgb(98,173,236) url(image-path('pattern.jpg')) repeat;
-}
-.clouds {
-	background: url(image-path('outer-clouds.png')) center center no-repeat;
-}
-.clouds span {
-	background: url(image-path('inner-clouds.png')) center center no-repeat;
+	background: rgb(98,173,236) url(image-path('bg.jpg')) left bottom fixed no-repeat !important;
+	-webkit-background-size: cover !important;
+  -moz-background-size: cover !important;
+  -o-background-size: cover !important;
+  background-size: cover !important;
 }
 #logo {
 	background: url(image-path('logo.png')) 0 0 no-repeat;

@@ -9,13 +9,14 @@
   margin: 0 auto;
   background: white;
   color: #333;
-  border-top: 10px solid white;
+  background: transparent !important;
 }
 .globe-container svg {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   fill: #fff;
+  z-index: 99;
 }
 .sphere {
   fill: rgb(156,191,217);
@@ -64,13 +65,17 @@
 }
 button.rotate-button {
   position: absolute;
-  top: 320px;
+  top: -webkit-calc(50% - 66px);
+  top: -moz-calc(50% - 66px);
+  top: -o-calc(50% - 66px);
+  top: -ms-calc(50% - 66px);
+  top: calc(50% - 66px);
   width: 48px;
   height: 80px;
   text-indent: 200%;
   outline: none;
   border: none;
-  z-index: 99;
+  z-index: 999;
 }
 button#rotate-left {
   left: 22%;
@@ -79,7 +84,11 @@ button#rotate-right {
   right: 22%;
 }
 button.rotate-button:hover {
-  top: 322px;
+  top: -webkit-calc(50% - 63px);
+  top: -moz-calc(50% - 63px);
+  top: -o-calc(50% - 63px);
+  top: -ms-calc(50% - 63px);
+  top: calc(50% - 63px);
   cursor: pointer;
 }
 button.close-heatmap {
@@ -116,11 +125,12 @@ button.close-heatmap {
 }
 .top-arrow-left,
 .top-arrow-right {
-  top: 36px;
+  top: 7%;
 }
 .bottom-arrow-left,
 .bottom-arrow-right {
-  top: 670px;
+  top: auto;
+  bottom: 7%;
 }
 
 @media screen and (max-width: 1280px) {
