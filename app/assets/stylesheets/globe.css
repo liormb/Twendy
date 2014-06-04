@@ -62,6 +62,7 @@
   background: #fff;
   color: #666;
   pointer-events: none;
+  z-index: 99;
 }
 button.rotate-button {
   position: absolute;
